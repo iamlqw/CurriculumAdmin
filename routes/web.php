@@ -59,5 +59,6 @@ Route::group(['middleware'=>['web','teacher.login'],'prefix'=>'admin','namespace
     Route::get('teacherinfo', 'IndexController@teacherinfo');
     Route::get('teacherquit', 'LoginController@quit');
     Route::any('teacherpass', 'IndexController@pass');
+    Route::any('list/batchcreate', 'ListController@batchcreate');
     Route::resource('list', 'ListController');
 });

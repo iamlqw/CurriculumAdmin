@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Model\Student;
 use App\Http\Model\teacher;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -42,13 +43,30 @@ class ListController extends CommonController
     {
         return view('admin.teacher.list.add');
     }
-//
+//批量上传页
+    public function batchcreate()
+    {
+        $input=Input::except('_token');
+        if($input!=null){
+            $ext=$input['source']->getClientOriginalExtension();
+            if($ext=='xls'||$ext=='xlsx'){
+                $path = $input['source']->getRealPath();
+                $filename = date('Y-m-d').'学生信息.'.$ext;
+                Storage::disk('public')->put($filename, file_get_contents($path));
+                return back()->with('errors','上传成功');
+            }else{
+                return back()->with('errors','文件格式不正确');
+            }
+        }else{
+            return view('admin.teacher.list.batchadd');
+        }
+    }
     public function store()
     {
         $input = Input::except('_token');
             $rules = [
                 'name' => 'required',
-                'sid' => 'required',
+                'sid' => 'required|digits:value',
                 'sex' => 'required',
                 'major' => 'required',
                 'class' => 'required',
@@ -56,6 +74,7 @@ class ListController extends CommonController
             $massage = [
                 'name.required'=>'学生姓名不能为空!',
                 'sid.required'=>'学号不能为空!',
+                'sid.required'=>'学号必须为数字!',
                 'sex.required'=>'性别不能为空!',
                 'major.required'=>'专业不能为空!',
                 'class.required'=>'班级不能为空!',
