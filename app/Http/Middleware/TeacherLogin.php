@@ -15,7 +15,7 @@ class TeacherLogin
      */
     public function handle($request, Closure $next)
     {
-        if (!session('user')||session('user')->user_identity!='teacher'){
+        if (!session('user')||session('user')['user_identity']!='teacher'){
             return redirect('admin/login');
         }
         return $next($request);

@@ -15,7 +15,7 @@ class StudentLogin
      */
     public function handle($request, Closure $next)
     {
-        if (!session('user')||session('user')->user_identity!='student'){
+        if (!session('user')||session('user')['user_identity']!='student'){
             return redirect('admin/login');
         }
         return $next($request);

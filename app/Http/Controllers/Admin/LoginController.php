@@ -20,13 +20,15 @@ class LoginController extends CommonController
             if (strtoupper($input['code'])!=$_code){
                 return back()->with('msg','验证码错误');
             }
-            $user = User::first();
-            if ($user->user_name!=$input['user_name']||Crypt::decrypt($user->user_pass)!=$input['user_pass']){
-                return back()->with('msg','用户名或密码错误');
+            $user = User::where('user_name',$input['user_name'])->get()->toArray();
+            if($user==null){
+                return back()->with('msg','用户名不存在');
+            }else if($user[0]['user_name']!=$input['user_name']||Crypt::decrypt($user[0]['user_pass'])!=$input['user_pass']){
+                return back()->with('msg','密码错误');
             }
-            session(['user'=>$user]);
-//            dd(session('user')->user_name);
-            if (session('user')->user_identity=='student'){
+            session(['user'=>$user[0]]);
+//            dd(session('user')['user_name']);
+            if (session('user')['user_identity']=='student'){
                 return redirect('admin/studentindex');
             }else{
                 return redirect('admin/teacherindex');

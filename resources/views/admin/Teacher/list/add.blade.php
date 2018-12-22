@@ -67,8 +67,8 @@
                         <td>
                             <select name="sex">
                                 <option value="">==请选择==</option>
-                                <option value="0">男</option>
-                                <option value="1">女</option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
                             </select>
                         </td>
                     </tr>

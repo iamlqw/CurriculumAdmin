@@ -10,7 +10,7 @@
 	<!--结果集标题与导航组件 开始-->
 	<div class="result_wrap">
         <div class="result_title">
-            <h3>操作</h3>
+            <h3><i class="fa fa-plus"></i>批量导入(请选择xlsx格式文件)</h3>
             @if($errors!=null)
                 <div class="mark">
                     @if(is_object($errors))
@@ -27,7 +27,6 @@
     <!--结果集标题与导航组件 结束-->
     
     <div class="result_wrap">
-    <i class="fa fa-plus"></i>批量导入(请选择Excel文件)<br>
         <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
             {{ csrf_field() }}
             <input id="file" type="file" class="form-control" name="source" required>
