@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Model\Student;
 use App\Http\Model\User;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class ListController extends CommonController
     //get.admin/list
     public function index()
     {
-        $student = Student::all();
+        $student = Student::orderBy('sid','ASC')->paginate(10);
         return view('admin.teacher.list.list')->with('data',$student);
     }
 
@@ -94,10 +95,12 @@ class ListController extends CommonController
 //                                continue;
                                 return back()->with('errors',$data['sid'].'学号学生存在');
                             }
-                            $re = Student::create($data);
-                            if ($re){
-                                continue;
-                            }else{
+                            try{
+                                DB::transaction(function () use(&$data){
+                                    Student::create($data);
+                                    User::insert(['user_name'=>$data['sid'],'user_pass'=>Crypt::encrypt($data['sid']),'user_identity'=>'student']);
+                                });
+                            } catch (Exception $e){
                                 return back()->with('errors','数据未知错误');
                             }
                         } else {
@@ -139,17 +142,15 @@ class ListController extends CommonController
                 if(Student::where('sid',$input['sid'])->get()->first()!=null){
                     return back()->with('errors','该学号学生存在');
                 }
-                $re = Student::create($input);
-                if ($re){
-                    $insert=User::insert(['user_name'=>$input['sid'],'user_pass'=>Crypt::encrypt($input['sid']),'user_identity'=>'student']);
-                    if($insert){
-                        return redirect('admin/list');
-                    }else{
-                        return back()->with('errors','用户创建失败，该学生无法登陆，请删除该学生');
-                    }
-                }else{
+                try{
+                    DB::transaction(function () use(&$input) {
+                        Student::create($input);
+                        User::insert(['user_name'=>$input['sid'],'user_pass'=>Crypt::encrypt($input['sid']),'user_identity'=>'student']);
+                    });
+                }catch (Exception $e){
                     return back()->with('errors','数据未知错误');
                 }
+                return redirect('admin/list');
             } else {
                 return back()->withErrors($validator);
             }
@@ -175,19 +176,25 @@ class ListController extends CommonController
 
     public function destroy($sid)
     {
-        $re = Student::where('sid',$sid)->delete($sid);
-        if ($re){
+        try{
+            DB::transaction(function () use(&$sid){
+                Student::where('sid',$sid)->delete($sid);
+                User::where('user_name',$sid)->delete($sid);
+            });
             $data = [
                 'status' => 0,
                 'msg' => '成功'
             ];
-        }else{
+            return $data;
+        } catch (Exception $e){
             $data = [
                 'status' => 1,
                 'msg' => '失败'
             ];
+            return $data;
         }
-        return $data;
+
+
     }
 //
 //    public function show()

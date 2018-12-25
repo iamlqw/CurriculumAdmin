@@ -49,11 +49,11 @@
                     <tr>
                         <th>学号：</th>
                         <td>
-                            <input type="text" name="sid"  value="{{$field->sid}}">
+                            <input type="text" name="sid" readonly  unselectable="on" value="{{$field->sid}}"><i class="require">*</i>该项不可修改
                         </td>
                     </tr>
                     <tr>
-                        <th width="120"><i class="require">*</i>性别：</th>
+                        <th width="120">性别：</th>
                         <td>
                             <select name="sex">
                                 <option value="">==请选择==</option>

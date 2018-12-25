@@ -10,7 +10,7 @@
 	<!--结果集标题与导航组件 开始-->
 	<div class="result_wrap">
         <div class="result_title">
-            <h3>操作</h3>
+            <h3><i class="fa fa-plus"></i>添加学生(请选择Excel文件)<br></h3>
             @if($errors!=null)
                 <div class="mark">
                     @if(is_object($errors))
@@ -22,17 +22,6 @@
                     @endif
                 </div>
             @endif
-            <div class="short_wrap">
-                {{--<a href="{{url('admin/list')}}"><i class="fa fa-plus"></i>学生信息</a>--}}
-                <i class="fa fa-plus"></i>批量导入(请选择Excel文件)<br>
-                <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <input id="file" type="file" class="form-control" name="source" required>
-                    <button type="submit" class="btn btn-link">确定</button>
-                </form>
-                {{--<a href="#"><i class="fa fa-recycle"></i>批量删除</a>--}}
-                {{--<a href="#"><i class="fa fa-refresh"></i>导出成绩单</a>--}}
-            </div>
         </div>
         {{--<div class="result_content">--}}
             {{--<div class="short_wrap">--}}

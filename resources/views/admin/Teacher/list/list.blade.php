@@ -40,7 +40,7 @@
                 <div class="short_wrap">
                     <a href="{{url('admin/list/create')}}"><i class="fa fa-plus"></i>新增学生</a>
                     <a href="{{url('admin/list/batchcreate')}}"><i class="fa fa-plus"></i>批量导入</a>
-                    <a href="#"><i class="fa fa-recycle"></i>批量删除</a>
+                    <a href="#" onclick="batchdel()"><i class="fa fa-recycle"></i>批量删除</a>
                     <a href="#"><i class="fa fa-refresh"></i>导出成绩单</a>
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc" width="5%"><input type="checkbox" name=""></th>
+                        <th class="tc" width="5%"><input type="checkbox" name="checkbox"></th>
                         <th class="tc">学生姓名</th>
                         <th class="tc">学号</th>
                         <th class="tc">性别</th>
@@ -66,7 +66,7 @@
 
                 @foreach($data as $v)
                     <tr>
-                        <td class="tc"><input type="checkbox" name="id[]" value="59"></td>
+                        <td class="tc"><input type="checkbox" name="row" value="{{$v->sid}}"></td>
                         <td class="tc">
                             {{$v->name}}
                         </td>
@@ -94,42 +94,30 @@
                 @endforeach
                 </table>
 
-
-<div class="page_nav">
-<div>
-<a class="first" href="/wysls/index.php/Admin/Tag/index/p/1.html">第一页</a> 
-<a class="prev" href="/wysls/index.php/Admin/Tag/index/p/7.html">上一页</a> 
-<a class="num" href="/wysls/index.php/Admin/Tag/index/p/6.html">6</a>
-<a class="num" href="/wysls/index.php/Admin/Tag/index/p/7.html">7</a>
-<span class="current">8</span>
-<a class="num" href="/wysls/index.php/Admin/Tag/index/p/9.html">9</a>
-<a class="num" href="/wysls/index.php/Admin/Tag/index/p/10.html">10</a> 
-<a class="next" href="/wysls/index.php/Admin/Tag/index/p/9.html">下一页</a> 
-<a class="end" href="/wysls/index.php/Admin/Tag/index/p/11.html">最后一页</a> 
-<span class="rows">11 条记录</span>
-</div>
-</div>
-
-
-
                 <div class="page_list">
-                    <ul>
-                        <li class="disabled"><a href="#">&laquo;</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
+                    {{$data->links()}}
                 </div>
             </div>
         </div>
     </form>
     <!--搜索结果页面 列表 结束-->
+
+    <style>
+        .result_content ul li span{
+            foot-size:15px;
+            padding: 6px 12px;
+        }
+    </style>
     <script>
+        // function selectAll(){
+        //     if(this.checked){
+        //         $("input[name='row']").prop("checked", true);
+        //     }else{
+        //         $("input[name='row']").prop("checked", false);
+        //     }
+        // }
         function delCate(sid) {
-            layer.confirm('您确定要删除这个分类吗？', {
+            layer.confirm('您确定要删除这个学生吗？', {
                 btn: ['确定','取消'] //按钮
             }, function(){
                 $.post("{{url('admin/list/')}}/"+sid,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
@@ -144,6 +132,29 @@
             }, function(){
 
             });
+        }
+        function batchdel(){
+            if($("input[name='row']:checked").size()==0){
+                layer.confirm('未选择任何学生。')
+            }else{
+                layer.confirm('您确定要删除这些学生吗？', {
+                    btn: ['确定','取消'] //按钮
+                }, function(){
+                    $("input[name='row']:checked").each(function() { // 遍历选中的checkbox
+                        sid = $(this).attr('value');  // 获取checkbox所在行的顺序
+                        $.post("{{url('admin/list/')}}/"+sid,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+                            if(data.status==0){
+                                layer.msg(data.msg, {icon: 6});
+                            }else{
+                                layer.msg(data.msg, {icon: 5});
+                            }
+                        });
+//            layer.msg('的确很重要', {icon: 1});
+                    }, function(){});
+                    location.reload();
+                    // $("table#test_table").find("tr:eq("+n+")").remove();
+                });
+            }
         }
     </script>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Model\Teacher;
 use App\Http\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -13,7 +14,8 @@ class IndexController extends CommonController
 {
     public function teacherindex()
     {
-       return view('admin.teacher.teacherindex');
+        $user = session('user')['user_name'];
+       return view('admin.teacher.teacherindex')->with('user',$user);
     }
     public function studentindex()
     {
@@ -21,7 +23,9 @@ class IndexController extends CommonController
     }
     public function teacherinfo()
     {
-        return view('admin.Teacher.info');
+        $user = Teacher::where('tid',session('user')['user_name'])->get()->toArray();
+//        dd($user[0]);
+        return view('admin.Teacher.info')->with('user',$user[0]);
     }
     public function studentinfo()
     {
