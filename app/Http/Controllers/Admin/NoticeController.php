@@ -12,9 +12,9 @@ class NoticeController extends CommonController
 {
     public function index()
     {
-        echo 'asasa';
-//       $data = Notice::orderBy('art_id','desc')->paginate(1);
-//        return view('admin/article.index',compact('data'));
+       $data = Notice::orderBy('nid','asc')->paginate(10);
+//       dd($data);
+        return view('admin.teacher.notice.list')->with('data',$data);
     }
 
     //get admin/notice/create
