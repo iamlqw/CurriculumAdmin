@@ -4,10 +4,10 @@ namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Notice extends Model
+class Answer extends Model
 {
-    protected $table='notices';
-    protected $primaryKey='nid';
+    protected $table='answers';
+    protected $primaryKey='aid';
     public $timestamps=false;
     protected $guarded=[];
     //

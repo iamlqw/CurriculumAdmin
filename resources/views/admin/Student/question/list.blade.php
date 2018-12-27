@@ -3,7 +3,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/teacherinfo')}}">首页</a> &raquo; 公告
+        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; 公告
     </div>
     <!--面包屑导航 结束-->
 
@@ -16,10 +16,10 @@
             <!--快捷导航 开始-->
             <div class="result_content">
                 <div class="result_title">
-                    <h3>公告</h3>
+                    <h3>讨论区</h3>
                 </div>
                 <div class="short_wrap">
-                    <a href="{{url('admin/notice/create')}}"><i class="fa fa-plus"></i>新建</a>
+                    <a href="{{url('admin/question/create')}}"><i class="fa fa-plus"></i>提问</a>
                     {{--<a href="{{url('admin/list/batchcreate')}}"><i class="fa fa-plus"></i>批量导入</a>--}}
                     {{--<a href="#" onclick="batchdel()"><i class="fa fa-recycle"></i>批量删除</a>--}}
                     {{--<a href="#"><i class="fa fa-refresh"></i>导出成绩单</a>--}}
@@ -34,20 +34,20 @@
                     {{--<link href="{{asset('resources/views/home/css/base.css')}}" rel="stylesheet">--}}
                     <link href="{{asset('resources/views/home/css/index.css')}}" rel="stylesheet">
                     <div>
-                        @foreach($data as $v)
-                        <h3>{{$v->notice_title}}</h3>
-                        <br>
+                        {{--@foreach($data as $v)--}}
+                        {{--<h3>{{$v->notice_title}}</h3>--}}
+                        {{--<br>--}}
                         {{--<figure><img src="images/001.png"></figure>--}}
-                        <ul>
-                            <p>{!! $v->notice_description !!}</p><br>
-                            <a href="#" onclick="delCate({{$v->nid}})"><i class="fa fa-recycle"></i>删除</a>
-                            <a href="{{url('admin/notice/content/'.$v->nid)}}" class="readmore">原文>></a>
-                        </ul>
-                        <p style="width: 100%" class="dateview"><span>{{date("Y-m-d H:i",date($v->notice_time)) }}</span><span>作者：{{$v->notice_editor}}</span></p>
-                        @endforeach
+                        {{--<ul>--}}
+                            {{--<p>{!! $v->notice_description !!}</p><br>--}}
+                            {{--<a href="#" onclick="delCate({{$v->nid}})"><i class="fa fa-recycle"></i>删除</a>--}}
+                            {{--<a href="{{url('admin/studentnotice/content/'.$v->nid)}}" class="readmore">原文>></a>--}}
+                        {{--</ul>--}}
+                        {{--<p style="width: 100%" class="dateview"><span>{{date("Y-m-d H:i",date($v->notice_time)) }}</span><span>作者：{{$v->notice_editor}}</span></p>--}}
+                        {{--@endforeach--}}
                     </div>
                     <div class="page_list">
-                        {{$data->links()}}
+                        {{--{{$data->links()}}--}}
                     </div>
                 </article>
             </div>

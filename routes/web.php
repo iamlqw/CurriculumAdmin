@@ -30,6 +30,9 @@ Route::group(['middleware'=>['student.login'],'prefix'=>'admin','namespace'=>'Ad
     Route::get('studentinfo', 'IndexController@studentinfo');
     Route::get('studentquit', 'LoginController@quit');
     Route::any('studentpass', 'IndexController@pass');
+    Route::any('studentnotice', 'NoticeController@studentindex');
+    Route::any('studentnotice/content/{nid}', 'NoticeController@studentcontent');
+    Route::resource('question', 'QuestionController');
 //
 //    Route::post('cate/changeorder', 'ListController@changeOrder');
 //    Route::resource('category', 'ListController');
@@ -58,5 +61,6 @@ Route::group(['middleware'=>['teacher.login'],'prefix'=>'admin','namespace'=>'Ad
     Route::any('teacherpass', 'IndexController@pass');
     Route::any('list/batchcreate', 'ListController@batchcreate');
     Route::resource('list', 'ListController');
+    Route::any('notice/content/{nid}', 'NoticeController@content');
     Route::resource('notice', 'NoticeController');
 });

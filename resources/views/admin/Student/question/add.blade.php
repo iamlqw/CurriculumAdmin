@@ -10,18 +10,18 @@
 	<!--结果集标题与导航组件 开始-->
 	<div class="result_wrap">
         <div class="result_title">
-            <h3><i class="fa fa-plus"></i>新建公告</h3>
-            @if($errors!=null)
-                <div class="mark">
-                    @if(is_object($errors))
-                        @foreach($errors->all() as $error)
-                            <p>{{$error}}</p>
-                        @endforeach
-                    @else
-                        <p>{{$errors}}</p>
-                    @endif
-                </div>
-            @endif
+            <h3><i class="fa fa-plus"></i>提问</h3>
+            {{--@if($errors!=null)--}}
+                {{--<div class="mark">--}}
+                    {{--@if(is_object($errors))--}}
+                        {{--@foreach($errors->all() as $error)--}}
+                            {{--<p>{{$error}}</p>--}}
+                        {{--@endforeach--}}
+                    {{--@else--}}
+                        {{--<p>{{$errors}}</p>--}}
+                    {{--@endif--}}
+                {{--</div>--}}
+            {{--@endif--}}
         </div>
         {{--<div class="result_content">--}}
             {{--<div class="short_wrap">--}}
@@ -46,19 +46,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>作者：</th>
-                        <td>
-                            <input type="text" class="sm" name="notice_editor">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>描述：</th>
-                        <td>
-                            <textarea name="notice_description" id="" cols="30" rows="10"></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>内容：</th>
+                        <th>问题内容：</th>
                         <td>
                             <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.config.js')}}"></script>
                             <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.all.min.js')}}"> </script>

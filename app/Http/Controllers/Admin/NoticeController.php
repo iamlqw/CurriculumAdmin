@@ -12,9 +12,15 @@ class NoticeController extends CommonController
 {
     public function index()
     {
-       $data = Notice::orderBy('nid','asc')->paginate(10);
+       $data = Notice::orderBy('nid','asc')->paginate(5);
 //       dd($data);
         return view('admin.teacher.notice.list')->with('data',$data);
+    }
+    public function studentindex()
+    {
+        $data = Notice::orderBy('nid','asc')->paginate(5);
+//       dd($data);
+        return view('admin.student.notice.list')->with('data',$data);
     }
 
     //get admin/notice/create
@@ -32,11 +38,15 @@ class NoticeController extends CommonController
 
         $rules = [
             'notice_title' => 'required',
+            'notice_editor' => 'required',
+            'notice_description' => 'required',
             'notice_content' => 'required'
         ];
         $massage = [
             'notice_title.required'=>'文章名称不能为空',
-            'notice_content.required'=>'文章内容不能为空'
+            'notice_content.required'=>'文章内容不能为空',
+            'notice_editor.required' => '文章作者不能为空',
+            'notice_description.required' => '文章描述不能为空'
         ];
         $validator = Validator::make($input,$rules,$massage);
         if ($validator->passes()) {
@@ -71,21 +81,47 @@ class NoticeController extends CommonController
 //
 //    }
 //
-//    public function destroy($art_id)
-//    {
-//        $re = Notice::where('art_id',$art_id)->delete($art_id);
-//        if ($re){
-//            $data = [
-//                'status' => 0,
-//                'msg' => '成功'
-//            ];
-//        }else{
-//            $data = [
-//                'status' => 1,
-//                'msg' => '失败'
-//            ];
-//        }
-//        return $data;
-//    }
+    public function destroy($nid)
+    {
+        $re = Notice::where('nid',$nid)->delete($nid);
+        if ($re){
+            $data = [
+                'status' => 0,
+                'msg' => '成功'
+            ];
+        }else{
+            $data = [
+                'status' => 1,
+                'msg' => '失败'
+            ];
+        }
+        return $data;
+    }
     //
+    public function content($nid)
+    {
+        if ($nid<1){
+            return back();
+        }else{
+            $field = Notice::find($nid);
+            if ($field){
+                return view('admin.teacher.notice.content',compact('field'));
+            }else{
+                return back();
+            }
+        }
+    }
+    public function studentcontent($nid)
+    {
+        if ($nid<1){
+            return back();
+        }else{
+            $field = Notice::find($nid);
+            if ($field){
+                return view('admin.student.notice.content',compact('field'));
+            }else{
+                return back();
+            }
+        }
+    }
 }

@@ -34,7 +34,7 @@ class LoginController extends CommonController
                 return redirect('admin/teacherindex');
             }
         }else{
-            session(['user'=>null]);
+//            session(['user'=>null]);
             return view('admin.login');
         }
     }
