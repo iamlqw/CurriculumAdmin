@@ -43,7 +43,24 @@
             </ul>
         </div>
     </div>
-
+    <div class="result_wrap">
+        <div class="result_title">
+            <h3>老师信息</h3>
+        </div>
+        <div class="result_content">
+            <ul>
+                <li>
+                    <label>老师办公室：</label><span>{{$user['office']}}</span>
+                </li>
+                <li>
+                    <label>公共邮箱：</label><span>{{$user['pubemail']}}</span>
+                </li>
+                <li>
+                    <label>课堂微信群：</label><span>{{$user['wechat']}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
 	<!--结果集列表组件 结束-->
 
 @endsection

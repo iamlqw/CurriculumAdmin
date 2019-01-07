@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Model\Notice;
 use App\Http\Model\Category;
+use App\Http\Model\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
@@ -12,55 +13,50 @@ class QuestionController extends CommonController
 {
     public function index()
     {
-//       $data = Notice::orderBy('nid','asc')->paginate(5);
+       $data = Question::orderBy('question_sid','asc')->paginate(5);
+
+       $mydata = Question::where('question_sid',session('user')['user_name'])->orderBy('question_sid','asc')->paginate(5);
 //       dd($data);
-        return view('admin.student.question.list');
+        return view('admin.student.question.list',compact('data','mydata'));
     }
 //    public function studentindex()
 //    {
-//        $data = Notice::orderBy('nid','asc')->paginate(5);
+//        $data = Notice::orderBy('nid','asc')->paginate(5)->with('data',$data);
 ////       dd($data);
 //        return view('admin.student.notice.list')->with('data',$data);
 //    }
 //
-//    //get admin/notice/create
+//get admin/question/create
     public function create()
     {
         return view('admin.student.question.add');
-//        $data = (new Category)->tree();
-//        return view('admin.article.add',compact('data'));
     }
-//    //post admin/notice
-//    public function store()
-//    {
-//        $input = Input::except('_token');
-//        $input['notice_time'] = time();
-//
-//        $rules = [
-//            'notice_title' => 'required',
-//            'notice_editor' => 'required',
-//            'notice_description' => 'required',
-//            'notice_content' => 'required'
-//        ];
-//        $massage = [
-//            'notice_title.required'=>'文章名称不能为空',
-//            'notice_content.required'=>'文章内容不能为空',
-//            'notice_editor.required' => '文章作者不能为空',
-//            'notice_description.required' => '文章描述不能为空'
-//        ];
-//        $validator = Validator::make($input,$rules,$massage);
-//        if ($validator->passes()) {
-//            $re = Notice::create($input);
-//            if ($re){
-//                return redirect('admin/notice');
-//            }else{
-//                return back()->with('errors','数据未知错误');
-//            }
-//        } else {
-//            return back()->withErrors($validator);
-//        }
-////        $re = Notice::create($input);
-//    }
+//post admin/question
+    public function store()
+    {
+        $input = Input::except('_token');
+        $input['question_time'] = time();
+        $input['question_sid'] = session('user')['user_name'];
+        $rules = [
+            'question_title' => 'required',
+            'question_content' => 'required'
+        ];
+        $massage = [
+            'question_title.required'=>'标题不能为空',
+            'question_content.required'=>'问题内容不能为空',
+        ];
+        $validator = Validator::make($input,$rules,$massage);
+        if ($validator->passes()) {
+            $re = Question::create($input);
+            if ($re){
+                return redirect('admin/question');
+            }else{
+                return back()->with('errors','数据未知错误');
+            }
+        } else {
+            return back()->withErrors($validator);
+        }
+    }
 //
 //    public function edit($art_id)
 //    {

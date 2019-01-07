@@ -3,7 +3,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; 公告
+        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; 讨论区
     </div>
     <!--面包屑导航 结束-->
 
@@ -11,7 +11,6 @@
     <!--结果页快捷搜索框 结束-->
 
     <!--搜索结果页面 列表 开始-->
-    <form action="#" method="post">
         <div class="result_wrap">
             <!--快捷导航 开始-->
             <div class="result_content">
@@ -28,30 +27,51 @@
             <!--快捷导航 结束-->
         </div>
 
-        <div class="result_wrap">
-            <div class="result_content">
-                <article>
-                    {{--<link href="{{asset('resources/views/home/css/base.css')}}" rel="stylesheet">--}}
-                    <link href="{{asset('resources/views/home/css/index.css')}}" rel="stylesheet">
-                    <div>
-                        {{--@foreach($data as $v)--}}
-                        {{--<h3>{{$v->notice_title}}</h3>--}}
-                        {{--<br>--}}
-                        {{--<figure><img src="images/001.png"></figure>--}}
-                        {{--<ul>--}}
-                            {{--<p>{!! $v->notice_description !!}</p><br>--}}
-                            {{--<a href="#" onclick="delCate({{$v->nid}})"><i class="fa fa-recycle"></i>删除</a>--}}
-                            {{--<a href="{{url('admin/studentnotice/content/'.$v->nid)}}" class="readmore">原文>></a>--}}
-                        {{--</ul>--}}
-                        {{--<p style="width: 100%" class="dateview"><span>{{date("Y-m-d H:i",date($v->notice_time)) }}</span><span>作者：{{$v->notice_editor}}</span></p>--}}
-                        {{--@endforeach--}}
+    <div class="result_wrap">
+        <ul class="tab_title">
+            <li class="active">所有问题</li>
+            <li>我的问题</li>
+            <li>知识库</li>
+        </ul>
+        <div class="tab_content">
+            <link href="{{asset('resources/views/home/css/index.css')}}" rel="stylesheet">
+            <div>
+                @foreach($data as $v)
+                    <div class="tips">
+                    <h3>{{$v->question_title}}</h3>
+                    <ul>
+                        <p>{!! $v->question_description !!}</p>
+                        <a href="{{url('admin/studentnotice/content/'.$v->nid)}}" class="readmore">原文>></a>
+                    </ul>
+                    <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
                     </div>
-                    <div class="page_list">
-                        {{--{{$data->links()}}--}}
-                    </div>
-                </article>
+                @endforeach
+
             </div>
         </div>
+        <div class="tab_content">
+            @foreach($mydata as $v)
+                <div class="tips">
+                    <h3>{{$v->question_title}}</h3>
+                    <ul>
+                        <p>{!! $v->question_description !!}</p>
+                        <a href="{{url('admin/studentnotice/content/'.$v->nid)}}" class="readmore">原文>></a>
+                    </ul>
+                    <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
+                </div>
+            @endforeach
+        </div>
+        <div class="tab_content">知识库</div>
+        <br>
+
+        <div class="tips">
+            <h3>商品规格添加问题</h3>
+            <p>1、规格分为通用规格和商品自定义规格，此处分析自定义规格</p>
+            <p>2、添加尺寸：X XL XXL  颜色：红 黑（规格名称，规格属性）</p>
+            <p>3、填充组合表，记录商品id</p>
+            <p>4、点击提交 -> 添加商品表，返回goods_id -> 添加规格表，记录goods_id -> 添加属性值组合表，记录goods_id</p>
+        </div>
+    </div>
     </form>
     <!--搜索结果页面 列表 结束-->
 
@@ -61,23 +81,23 @@
             padding: 6px 12px;
         }
     </style>
-    <script>
-        function delCate(nid) {
-            layer.confirm('您确定要删除这条公告吗？', {
-                btn: ['确定','取消'] //按钮
-            }, function(){
-                $.post("{{url('admin/notice/')}}/"+nid,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
-                    if(data.status==0){
-                        layer.msg(data.msg, {icon: 6});
-                        location.reload();
-                    }else{
-                        layer.msg(data.msg, {icon: 5});
-                    }
-                });
-//            layer.msg('的确很重要', {icon: 1});
-            }, function(){
+    {{--<script>--}}
+        {{--function delCate(nid) {--}}
+            {{--layer.confirm('您确定要删除这条公告吗？', {--}}
+                {{--btn: ['确定','取消'] //按钮--}}
+            {{--}, function(){--}}
+                {{--$.post("{{url('admin/notice/')}}/"+nid,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {--}}
+                    {{--if(data.status==0){--}}
+                        {{--layer.msg(data.msg, {icon: 6});--}}
+                        {{--location.reload();--}}
+                    {{--}else{--}}
+                        {{--layer.msg(data.msg, {icon: 5});--}}
+                    {{--}--}}
+                {{--});--}}
+{{--//            layer.msg('的确很重要', {icon: 1});--}}
+            {{--}, function(){--}}
 
-            });
-        }
-    </script>
+            {{--});--}}
+        {{--}--}}
+    {{--</script>--}}
 @endsection

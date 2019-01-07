@@ -35,15 +35,19 @@
                     <link href="{{asset('resources/views/home/css/index.css')}}" rel="stylesheet">
                     <div>
                         @foreach($data as $v)
-                        <h3>{{$v->notice_title}}</h3>
-                        <br>
-                        {{--<figure><img src="images/001.png"></figure>--}}
-                        <ul>
-                            <p>{!! $v->notice_description !!}</p><br>
-                            <a href="#" onclick="delCate({{$v->nid}})"><i class="fa fa-recycle"></i>删除</a>
-                            <a href="{{url('admin/notice/content/'.$v->nid)}}" class="readmore">原文>></a>
-                        </ul>
-                        <p style="width: 100%" class="dateview"><span>{{date("Y-m-d H:i",date($v->notice_time)) }}</span><span>作者：{{$v->notice_editor}}</span></p>
+                            <div class="result_wrap">
+                                <h3>{{$v->notice_title}}</h3>
+                                <br>
+                                <ul>
+                                    <p>{!! $v->notice_description !!}</p><br>
+                                    <a href="#" onclick="delCate({{$v->nid}})"><i class="fa fa-recycle"></i>删除</a>
+                                    <a href="{{url('admin/notice/content/'.$v->nid)}}" class="readmore">原文>></a>
+                                </ul>
+                                <p style="width: 100%" class="dateview">
+                                    <span>{{date("Y-m-d H:i",date($v->notice_time)) }}</span>
+                                    <span>作者：{{$v->notice_editor}}</span>
+                                </p>
+                            </div>
                         @endforeach
                     </div>
                     <div class="page_list">
