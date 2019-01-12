@@ -3,7 +3,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; <a href="{{url('answer')}}">讨论区</a> &raquo; 提问
+        <i class="fa fa-home"></i> <a href="{{url('admin/teacherinfo')}}">首页</a> &raquo; <a href="{{url('admin/notice')}}">公告页</a> &raquo; 新建公告
     </div>
     <!--面包屑导航 结束-->
 
@@ -27,7 +27,7 @@
     <!--结果集标题与导航组件 结束-->
     
     <div class="result_wrap">
-        <form action="{{url('admin/question')}}" method="post">
+        <form action="{{url('answer')}}" method="post">
             {{csrf_field()}}
             <table class="add_tab">
                 <tbody>
@@ -40,7 +40,19 @@
                     <tr>
                         <th>问题内容：</th>
                         <td>
-                            <textarea name="question_content" id="" cols="30" rows="10"></textarea>
+                            <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.config.js')}}"></script>
+                            <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.all.min.js')}}"> </script>
+                            <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/lang/zh-cn/zh-cn.js')}}"></script>
+                            <script id="editor" name="question_content" type="text/plain" style="width:860px;height:300px;"></script>
+                            <script type="text/javascript">
+                            var ue = UE.getEditor('editor');
+                            </script>
+                            <style>
+                                .edui-default{line-height: 28px;}
+                                div.edui-combox-body,div.edui-button-body,div.edui-splitbutton-body
+                                {overflow: hidden; height:20px;}
+                                div.edui-box{overflow: hidden; height:22px;}
+                            </style>
                         </td>
                     </tr>
                     <tr>

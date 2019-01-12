@@ -3,7 +3,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; 讨论区
+        <i class="fa fa-home"></i> <a href="{{url('admin/teacherinfo')}}">首页</a> &raquo; 讨论区
     </div>
     <!--面包屑导航 结束-->
 
@@ -17,20 +17,14 @@
                 <div class="result_title">
                     <h3>讨论区</h3>
                 </div>
-                <div class="short_wrap">
-                    <a href="{{url('admin/question/create')}}"><i class="fa fa-plus"></i>提问</a>
-                    {{--<a href="{{url('admin/list/batchcreate')}}"><i class="fa fa-plus"></i>批量导入</a>--}}
-                    {{--<a href="#" onclick="batchdel()"><i class="fa fa-recycle"></i>批量删除</a>--}}
-                    {{--<a href="#"><i class="fa fa-refresh"></i>导出成绩单</a>--}}
-                </div>
             </div>
             <!--快捷导航 结束-->
         </div>
 
     <div class="result_wrap">
         <ul class="tab_title">
-            <li class="active">所有问题</li>
-            <li>我的问题</li>
+            <li class="active">未回答</li>
+            <li>已回答</li>
             <li>知识库</li>
         </ul>
         <div class="tab_content">
@@ -41,9 +35,13 @@
                     <h3>{{$v->question_title}}</h3>
                     <ul>
                         <p>{!! $v->question_description !!}</p>
-                        <a href="{{url('admin/question/content/'.$v->qid)}}" class="readmore">原文>></a>
+                        <a href="#" onclick="delCate({{$v->qid}})"><i class="fa fa-recycle"></i>删除</a>
+                        <a href="{{url('admin/answer/'.$v->qid.'/edit')}}" class="readmore">回答>></a>
                     </ul>
-                    <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
+                    <p style="width: 30%" class="dateview">
+                        <span>{{date("Y-m-d H:i",date($v->question_time)) }}</span>
+                        <span>提问者：{{$v->question_sid}}</span>
+                    </p>
                     </div>
                 @endforeach
             </div>
@@ -52,19 +50,22 @@
             </div>
         </div>
         <div class="tab_content">
-            @foreach($mydata as $v)
+            @foreach($ansdata as $v)
                 <div class="tips">
                     <h3>{{$v->question_title}}</h3>
                     <ul>
                         <p>{!! $v->question_description !!}</p>
-                        <a href="{{url('admin/question/content/'.$v->qid)}}" class="readmore">原文>></a>
+                        <a href="{{url('admin/answer/content/'.$v->qid)}}" class="readmore">原文>></a>
                     </ul>
-                    <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
+                    <p style="width: 30%" class="dateview">
+                        <span>{{date("Y-m-d H:i",date($v->question_time)) }}</span>
+                        <span>提问者：{{$v->question_sid}}</span>
+                    </p>
                 </div>
             @endforeach
         </div>
         <div class="page_list">
-            {{$mydata->links()}}
+            {{$ansdata->links()}}
         </div>
         <div class="tab_content">
             @foreach($kdata as $v)
@@ -74,7 +75,10 @@
                         <p>{!! $v->question_description !!}</p>
                         <a href="{{url('admin/question/content/'.$v->qid)}}" class="readmore">原文>></a>
                     </ul>
-                    <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
+                    <p style="width: 30%" class="dateview">
+                        <span>{{date("Y-m-d H:i",date($v->question_time)) }}</span>
+                        <span>提问者：{{$v->question_sid}}</span>
+                    </p>
                 </div>
             @endforeach
         </div>
@@ -99,5 +103,23 @@
             padding: 6px 12px;
         }
     </style>
+    <script>
+        function delCate(qid) {
+            layer.confirm('您确定要删除这条公告吗？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                $.post("{{url('admin/answer/')}}/"+qid,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+                    if(data.status==0){
+                        layer.msg(data.msg, {icon: 6});
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+//            layer.msg('的确很重要', {icon: 1});
+            }, function(){
 
+            });
+        }
+    </script>
 @endsection

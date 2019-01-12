@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Model\Student;
 use App\Http\Model\Teacher;
+use App\Http\Model\User;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Excel;

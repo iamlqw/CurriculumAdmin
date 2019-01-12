@@ -33,5 +33,11 @@
             <button type="submit" class="btn btn-link">确定</button>
         </form>
     </div>
-
+    <div class="tips">
+        <h3>导入注意事项</h3>
+        <p>1、导入文件必须为xls或xlsx格式。</p>
+        <p>2、导入的信息必须存放在sheet1中。</p>
+        <p>3、导入信息的第一行必须按sid、name、sex、major、class顺序进行排列。</p>
+        <p>4、导入表中不能包含有重复或已存在学生信息，若出现会让出错处之后的信息导入失败。</p>
+    </div>
 @endsection

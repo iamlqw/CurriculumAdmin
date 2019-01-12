@@ -16,8 +16,10 @@ class QuestionController extends CommonController
        $data = Question::orderBy('question_sid','asc')->paginate(5);
 
        $mydata = Question::where('question_sid',session('user')['user_name'])->orderBy('question_sid','asc')->paginate(5);
-//       dd($data);
-        return view('admin.student.question.list',compact('data','mydata'));
+
+       $kdata = Question::where('question_isimportant','已入库')->orderBy('question_sid','asc')->paginate(5);
+
+        return view('admin.student.question.list',compact('data','mydata','kdata'));
     }
 //    public function studentindex()
 //    {
@@ -107,17 +109,17 @@ class QuestionController extends CommonController
 //            }
 //        }
 //    }
-//    public function studentcontent($nid)
-//    {
-//        if ($nid<1){
-//            return back();
-//        }else{
-//            $field = Notice::find($nid);
-//            if ($field){
-//                return view('admin.student.notice.content',compact('field'));
-//            }else{
-//                return back();
-//            }
-//        }
-//    }
+    public function studentquestion($qid)
+    {
+        if ($qid<1){
+            return back();
+        }else{
+            $field = question::find($qid);
+            if ($field){
+                return view('admin.student.question.content',compact('field'));
+            }else{
+                return back();
+            }
+        }
+    }
 }
