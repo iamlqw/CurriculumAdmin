@@ -10,6 +10,7 @@ use App\Http\Model\User;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Excel;
+use Illuminate\Support\Facades\Storage;
 
 class TestController extends Controller{
     public function index()
@@ -35,6 +36,10 @@ class TestController extends Controller{
 //        dd($teacher);
 //        $student = Student::all();
 //        dd($student);
-        dd(Experiment::all());
+//        dd(Experiment::all());
+//        $re2 = Storage::disk('uploads')->delete('a.txt');
+        $deldata = Experiment::where('eid',11)->get()->toArray();
+        $re2=Storage::disk('uploads')->delete($deldata[0]['experiment_document']);
+        dd($re2);
     }
 }

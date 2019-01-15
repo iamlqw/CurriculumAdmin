@@ -51,13 +51,15 @@ class ExperimentController extends CommonController
             $file = Input::file('experiment_document');
             if($file->isValid()){
                 $ext = $file->getClientOriginalExtension();//文件后缀
-//                if($ext=='pdf'){
+                if($ext=='pdf'){
                     $newname = $input['experiment_name'].'.'.$ext;//重组文件名
                     $path = $file->move(base_path().'/storage/app/public/uploads/experiment/experimentName/',$newname);//写入
-                    $input['experiment_document'] = 'uploads/experiment/experimentName/'.$newname;
-//                }
+                    $input['experiment_document'] = 'experiment/experimentName/'.$newname;
+                }else{
+                    return back()->with('errors','请上传pdf形式文件');
+                }
             }else{
-                return back()->with('errors','文件格式错误');
+                return back()->with('errors','文件必须小于2M');
             }
             $input['experiment_endtime'] = strtotime($input['experiment_endtime']);
             $re = Experiment::create($input);
@@ -96,19 +98,16 @@ class ExperimentController extends CommonController
             $file = Input::file('experiment_document');
             if ($file->isValid()) {
                 $ext = $file->getClientOriginalExtension();//文件后缀
-//                if($ext=='pdf'){
-                $newname = $input['experiment_name'] . '.' . $ext;//重组文件名
-                $path = $file->move(base_path() .'/storage/app/public/uploads/experiment/experimentName/', $newname);//写入
-                $input['experiment_document'] = 'uploads/experiment/experimentName/'.$newname;
-//                }
+                if($ext=='pdf'){
+                    $newname = $input['experiment_name'] . '.' . $ext;//重组文件名
+                    $path = $file->move(base_path() .'/storage/app/public/uploads/experiment/experimentName/', $newname);//写入
+                    $input['experiment_document'] = 'experiment/experimentName/'.$newname;
+                }else{
+                    return back()->with('errors','请上传pdf形式文件');
+                }
             } else {
-                return back()->with('errors', '文件格式错误');
+                return back()->with('errors', '文件必须小于2M');
             }
-//            $deldata = Experiment::where('eid',$eid)->get()->toArray();
-//            dd($deldata[0]['experiment_document']);
-//            $fileName = 'a.txt';
-//            $re2 = Storage::disk('uploads')->delete($fileName); ;
-//            dd($re2);
             $input['experiment_endtime'] = strtotime($input['experiment_endtime']);
             $re = Experiment::where('eid',$eid)->update($input);
             if ($re) {
@@ -122,9 +121,8 @@ class ExperimentController extends CommonController
     public function destroy($eid)
     {
             $deldata = Experiment::where('eid',$eid)->get()->toArray();
-            $re2 = Storage::delete($deldata[0]['experiment_document']);
+            $re2=Storage::disk('uploads')->delete($deldata[0]['experiment_document']);
             $re1 = Experiment::where('eid',$eid)->delete($eid);
-
             if ($re1&&$re2){
                 $data = [
                     'status' => 0,
@@ -139,35 +137,30 @@ class ExperimentController extends CommonController
         return $data;
     }
 // 展示页
-    public function content($qid)
+    public function content($eid)
     {
-        if ($qid<1){
+        $field = Experiment::find($eid);
+        if ($field){
+            return view('admin.teacher.experiment.content',compact('field'));
+        }else{
             return back();
-        }else{
-
-            $field = Question::find($qid);
-            if ($field){
-                return view('admin.teacher.answer.content',compact('field'));
-            }else{
-                return back();
-            }
         }
     }
 
-    public function intodatabase($qid)
-    {
-        $re = Question::where('qid',$qid)->update(['question_isimportant'=>'已入库']);
-        if ($re){
-            $data = [
-                'status' => 0,
-                'msg' => '成功'
-            ];
-        }else{
-            $data = [
-                'status' => 1,
-                'msg' => '失败，该问题已入库'
-            ];
-        }
-        return $data;
-    }
+//    public function intodatabase($qid)
+//    {
+//        $re = Question::where('qid',$qid)->update(['question_isimportant'=>'已入库']);
+//        if ($re){
+//            $data = [
+//                'status' => 0,
+//                'msg' => '成功'
+//            ];
+//        }else{
+//            $data = [
+//                'status' => 1,
+//                'msg' => '失败，该问题已入库'
+//            ];
+//        }
+//        return $data;
+//    }
 }

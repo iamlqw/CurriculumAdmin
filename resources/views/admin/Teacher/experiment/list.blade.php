@@ -30,7 +30,6 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc" width="5%"><input type="checkbox" name="checkbox"></th>
                         <th class="tc">实验名称</th>
                         <th class="tc">实验要求</th>
                         <th class="tc">开始时间</th>
@@ -41,7 +40,6 @@
 
                 @foreach($data as $v)
                     <tr>
-                        <td class="tc"><input type="checkbox" name="row" value="{{$v->sid}}"></td>
                         <td class="tc">
                             {{$v->experiment_name}}
                         </td>
@@ -55,7 +53,7 @@
                             {{date("Y-m-d H:i",date($v->experiment_endtime))}}
                         </td>
                         <td>
-                            提交人数：20<a href="">详情</a>
+                            提交人数：20<a href="{{url('admin/experiment/content/'.$v->eid)}}">详情</a>
                         </td>
                         <td>
                             <a href="{{url('admin/experiment/'.$v->eid.'/edit')}}">修改</a>
