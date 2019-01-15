@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Model\Experiment;
 use App\Http\Model\Student;
 use App\Http\Model\Teacher;
 use App\Http\Model\User;
@@ -34,5 +35,6 @@ class TestController extends Controller{
 //        dd($teacher);
 //        $student = Student::all();
 //        dd($student);
+        dd(Experiment::all());
     }
 }

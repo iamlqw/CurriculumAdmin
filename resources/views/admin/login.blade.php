@@ -7,8 +7,8 @@
 </head>
 <body style="background:#F3F3F4;">
 	<div class="login_box">
-		<h1>Blog</h1>
-		<h2>欢迎使用博客管理平台</h2>
+		<h1>景观</h1>
+		<h2>生态学课程管理平台</h2>
 		<div class="form">
 			@if(session('msg'))
 				<p style="color:red">{{session('msg')}}</p>
@@ -34,7 +34,7 @@
 					</li>
 				</ul>
 			</form>
-			<p><a href="#">返回首页</a> &copy; 2016 Powered by <a href="http://www.houdunwang.com" target="_blank">http://www.houdunwang.com</a></p>
+			<p>  2018 Powered by 北京林业大学</p>
 		</div>
 	</div>
 </body>

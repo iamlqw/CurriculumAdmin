@@ -109,13 +109,6 @@
         }
     </style>
     <script>
-        // function selectAll(){
-        //     if(this.checked){
-        //         $("input[name='row']").prop("checked", true);
-        //     }else{
-        //         $("input[name='row']").prop("checked", false);
-        //     }
-        // }
         function delCate(sid) {
             layer.confirm('您确定要删除这个学生吗？', {
                 btn: ['确定','取消'] //按钮

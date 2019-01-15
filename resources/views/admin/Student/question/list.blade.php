@@ -52,6 +52,7 @@
             </div>
         </div>
         <div class="tab_content">
+            <div>
             @foreach($mydata as $v)
                 <div class="tips">
                     <h3>{{$v->question_title}}</h3>
@@ -62,11 +63,13 @@
                     <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
                 </div>
             @endforeach
-        </div>
-        <div class="page_list">
-            {{$mydata->links()}}
+            </div>
+            <div class="page_list">
+                {{$data->links()}}
+            </div>
         </div>
         <div class="tab_content">
+            <div>
             @foreach($kdata as $v)
                 <div class="tips">
                     <h3>{{$v->question_title}}</h3>
@@ -77,10 +80,12 @@
                     <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
                 </div>
             @endforeach
+            </div>
+            <div class="page_list">
+                {{$kdata->links()}}
+            </div>
         </div>
-        <div class="page_list">
-            {{$kdata->links()}}
-        </div>
+
         <br>
 
         <div class="tips">

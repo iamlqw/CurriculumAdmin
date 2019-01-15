@@ -31,7 +31,27 @@
                         <span>提问者：{{$field->question_sid}}</span>
                         <span>查看次数：2323</span></p>
                     <ul class="infos">
-                        <p>{!! $field->question_content !!}</p>
+                        <div class="result_content">
+                            <ul>
+                                <li>
+                                    <label>问题描述：</label>
+                                </li>
+                                <li class="show">
+                                    <span>{{$field->question_content}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <br>
+                        <div class="result_content">
+                            <ul>
+                                <li>
+                                    <label>老师回答：</label>
+                                </li>
+                                <li class="show">
+                                    <span>{!! $field->question_answer !!}</span>
+                                </li>
+                            </ul>
+                        </div>
                     </ul>
                     <p class="nextinfo">
                         <p style="text-align: center">
@@ -50,6 +70,7 @@
             foot-size:15px;
             padding: 6px 12px;
         }
+        li.show{padding-left: 10%}
     </style>
     <script>
 

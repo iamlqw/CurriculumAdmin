@@ -82,7 +82,7 @@ class ListController extends CommonController
                         $massage = [
                             'name.required'=>'学生姓名不能为空!',
                             'sid.required'=>'学号不能为空!',
-                            'sid.num'=>'学号必须为数字!',
+                            'sid.num'=>'学号必须为7位数字!',
                             'sex.required'=>'性别不能为空!',
                             'major.required'=>'专业不能为空!',
                             'class.required'=>'班级不能为空!',
@@ -107,11 +107,8 @@ class ListController extends CommonController
                             return back()->withErrors($validator);
                         }
                 }
-//                if(flag==true){
                     return redirect('admin/list');
-//                }else{
-//                    return back()->withErrors($errors);
-//                }
+
             }else{
                 return back()->with('errors','文件格式不正确');
             }

@@ -13,7 +13,7 @@ class QuestionController extends CommonController
 {
     public function index()
     {
-       $data = Question::orderBy('question_sid','asc')->paginate(5);
+       $data = Question::where('question_isanswer','已回答')->orderBy('question_sid','asc')->paginate(5);
 
        $mydata = Question::where('question_sid',session('user')['user_name'])->orderBy('question_sid','asc')->paginate(5);
 

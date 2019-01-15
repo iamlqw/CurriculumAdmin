@@ -14,11 +14,11 @@ class AnswerController extends CommonController
     //GET admin/answer
     public function index()
     {
-       $data = Question::where('question_isanswer','未回答')->orderBy('question_sid','asc')->paginate(5);
+       $data = Question::where('question_isanswer','未回答')->orderBy('question_sid','asc')->paginate(10);
 
-       $ansdata = Question::where('question_sid',session('user')['user_name'])->orderBy('question_sid','asc')->paginate(5);
+       $ansdata = Question::where('question_isanswer','已回答')->orderBy('question_sid','asc')->paginate(10);
 
-       $kdata = Question::where('question_isimportant','已入库')->orderBy('question_sid','asc')->paginate(5);
+       $kdata = Question::where('question_isimportant','已入库')->orderBy('question_sid','asc')->paginate(10);
 
         return view('admin.teacher.answer.list',compact('data','ansdata','kdata'));
     }
@@ -86,7 +86,7 @@ class AnswerController extends CommonController
             }
         }
     }
-//
+
     public function destroy($qid)
     {
         $re = Question::where('qid',$qid)->delete($qid);
@@ -103,7 +103,7 @@ class AnswerController extends CommonController
         }
         return $data;
     }
-//    //
+// 展示页
     public function content($qid)
     {
         if ($qid<1){
@@ -118,17 +118,21 @@ class AnswerController extends CommonController
             }
         }
     }
-    public function studentquestion($qid)
+
+    public function intodatabase($qid)
     {
-        if ($qid<1){
-            return back();
+        $re = Question::where('qid',$qid)->update(['question_isimportant'=>'已入库']);
+        if ($re){
+            $data = [
+                'status' => 0,
+                'msg' => '成功'
+            ];
         }else{
-            $field = question::find($qid);
-            if ($field){
-                return view('admin.student.question.content',compact('field'));
-            }else{
-                return back();
-            }
+            $data = [
+                'status' => 1,
+                'msg' => '失败，该问题已入库'
+            ];
         }
+        return $data;
     }
 }

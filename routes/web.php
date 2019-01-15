@@ -75,4 +75,7 @@ Route::group(['middleware'=>['teacher.login'],'prefix'=>'admin','namespace'=>'Ad
     //回答问题
     Route::resource('answer', 'AnswerController');
     Route::any('answer/content/{qid}', 'AnswerController@content');
+    Route::any('answer/intodatabase/{qid}', 'AnswerController@intodatabase');
+    //实验
+    Route::resource('experiment', 'ExperimentController');
 });

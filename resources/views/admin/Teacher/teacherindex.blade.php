@@ -22,13 +22,13 @@
 	<div class="menu_box">
 		<ul>
             <li>
-            	<h3><a href="{{url('admin/notice')}}" target="main"><i class="fa fa-fw fa-clipboard"></i>公告墙</a></h3>
+            	<h3><a href="{{url('admin/notice')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>公告墙</a></h3>
             </li>
             <li>
-				<h3><a href="add.blade.php" target="main"><i class="fa fa-fw fa-cog"></i>教学资料</a></h3>
+				<h3><a href="add.blade.php" target="main"><i class="fa fa-fw fa-list-alt"></i>教学资料</a></h3>
             </li>
             <li>
-				<h3><a href="add.blade.php" target="main"><i class="fa fa-fw fa-thumb-tack"></i>作业</a></h3>
+				<h3><a href="{{url('admin/experiment')}}" target="main"><i class="fa fa-fw fa-clipboard"></i>平时实验</a></h3>
             </li>
 			<li>
 				<h3><a href="{{url('admin/answer')}}" target="main"><i class="fa fa-fw fa-thumb-tack"></i>讨论区</a></h3>

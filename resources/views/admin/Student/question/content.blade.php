@@ -3,7 +3,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; <a href="{{url('answer')}}">讨论区</a> &raquo; 原文
+        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; <a href="{{url('admin/question')}}">讨论区</a> &raquo; 原文
     </div>
     <!--面包屑导航 结束-->
 
@@ -28,7 +28,27 @@
                     <h2 style="text-align:center;">{{$field->question_title}}</h2>
                     <p style="text-align:center;width: 100%" class="dateview"><span class="d_time">发布时间：{{date("Y-m-d H:i",date($field->question_time)) }}</span><span>查看次数：2323</span></p>
                     <ul class="infos">
-                        <p>{!! $field->question_content !!}</p>
+                        <div class="result_content">
+                            <ul>
+                                <li>
+                                    <label>问题描述：</label>
+                                </li>
+                                <li class="show">
+                                    <span>{{$field->question_content}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <br>
+                        <div class="result_content">
+                            <ul>
+                                <li>
+                                    <label>老师回答：</label>
+                                </li>
+                                <li class="show">
+                                    <span>{!! $field->question_answer !!}</span>
+                                </li>
+                            </ul>
+                        </div>
                     </ul>
                     <p class="nextinfo">
                         <p style="text-align: center">
@@ -47,6 +67,7 @@
             foot-size:15px;
             padding: 6px 12px;
         }
+        li.show{padding-left: 10%}
     </style>
     <script>
 

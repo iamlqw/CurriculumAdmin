@@ -32,29 +32,29 @@
             <div>
                 @foreach($data as $v)
                     <div class="tips">
-                    <h3>{{$v->question_title}}</h3>
-                    <ul>
-                        <p>{!! $v->question_description !!}</p>
-                        <a href="#" onclick="delCate({{$v->qid}})"><i class="fa fa-recycle"></i>删除</a>
-                        <a href="{{url('admin/answer/'.$v->qid.'/edit')}}" class="readmore">回答>></a>
-                    </ul>
-                    <p style="width: 30%" class="dateview">
-                        <span>{{date("Y-m-d H:i",date($v->question_time)) }}</span>
-                        <span>提问者：{{$v->question_sid}}</span>
-                    </p>
+                        <h3>{{$v->question_title}}</h3>
+                        <ul>
+                            <p>{!! $v->question_content !!}</p>
+                            <a href="#" onclick="delCate({{$v->qid}})"><i class="fa fa-recycle"></i>删除</a>
+                            <a href="{{url('admin/answer/'.$v->qid.'/edit')}}" class="readmore">回答>></a>
+                        </ul>
+                        <p style="width: 30%" class="dateview">
+                            <span>{{date("Y-m-d H:i",date($v->question_time)) }}</span>
+                            <span>提问者：{{$v->question_sid}}</span>
+                        </p>
                     </div>
                 @endforeach
             </div>
-            <div class="page_list">
-                {{$data->links()}}
-            </div>
         </div>
         <div class="tab_content">
+            <div>
             @foreach($ansdata as $v)
                 <div class="tips">
                     <h3>{{$v->question_title}}</h3>
                     <ul>
-                        <p>{!! $v->question_description !!}</p>
+                        <p>{!! $v->question_content !!}</p>
+                        <a href="#" onclick="delCate({{$v->qid}})"><i class="fa fa-recycle"></i>删除</a>
+                        <a href="#" onclick="inDatabase({{$v->qid}})"><i class="fa fa-plus"></i>入库</a>
                         <a href="{{url('admin/answer/content/'.$v->qid)}}" class="readmore">原文>></a>
                     </ul>
                     <p style="width: 30%" class="dateview">
@@ -63,17 +63,17 @@
                     </p>
                 </div>
             @endforeach
-        </div>
-        <div class="page_list">
-            {{$ansdata->links()}}
+            </div>
         </div>
         <div class="tab_content">
+            <div>
             @foreach($kdata as $v)
                 <div class="tips">
                     <h3>{{$v->question_title}}</h3>
                     <ul>
-                        <p>{!! $v->question_description !!}</p>
-                        <a href="{{url('admin/question/content/'.$v->qid)}}" class="readmore">原文>></a>
+                        <p>{!! $v->question_content !!}</p>
+                        <a href="#" onclick="delCate({{$v->qid}})"><i class="fa fa-recycle"></i>删除</a>
+                        <a href="{{url('admin/answer/content/'.$v->qid)}}" class="readmore">原文>></a>
                     </ul>
                     <p style="width: 30%" class="dateview">
                         <span>{{date("Y-m-d H:i",date($v->question_time)) }}</span>
@@ -81,9 +81,7 @@
                     </p>
                 </div>
             @endforeach
-        </div>
-        <div class="page_list">
-            {{$kdata->links()}}
+            </div>
         </div>
         <br>
 
@@ -105,10 +103,27 @@
     </style>
     <script>
         function delCate(qid) {
-            layer.confirm('您确定要删除这条公告吗？', {
+            layer.confirm('您确定要删除这个问题吗？', {
                 btn: ['确定','取消'] //按钮
             }, function(){
                 $.post("{{url('admin/answer/')}}/"+qid,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+                    if(data.status==0){
+                        layer.msg(data.msg, {icon: 6});
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+//            layer.msg('的确很重要', {icon: 1});
+            }, function(){
+
+            });
+        }
+        function inDatabase(qid){
+            layer.confirm('您确定要这个问题入库吗？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                $.post("{{url('admin/answer/intodatabase/')}}/"+qid,{'_token':"{{csrf_token()}}"},function (data) {
                     if(data.status==0){
                         layer.msg(data.msg, {icon: 6});
                         location.reload();
