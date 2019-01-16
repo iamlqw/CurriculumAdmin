@@ -1,0 +1,85 @@
+@extends('layout.admin')
+@section('content')
+    <!--面包屑导航 开始-->
+    <div class="crumb_warp">
+        <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
+        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; 实验
+    </div>
+    <!--面包屑导航 结束-->
+
+	<!--结果页快捷搜索框 开始-->
+    <!--结果页快捷搜索框 结束-->
+
+    <!--搜索结果页面 列表 开始-->
+    <div>
+        <div class="result_wrap">
+            <!--快捷导航 开始-->
+            <div class="result_content">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>实验</legend>
+                </fieldset>
+            </div>
+            <!--快捷导航 结束-->
+        </div>
+        <div class="layui-collapse">
+            @foreach($data as $v)
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">{{$v->experiment_name}}</h2>
+                <div class="layui-colla-content layui-show">
+                    实验要求：{{$v->experiment_content}}<br>
+                    截止日期：{{date("Y-m-d H:i",date($v->experiment_endtime))}}<br>
+                    <a target="view_window" href="/storage/app/public/uploads/{{$v->experiment_document}}">实验文件</a>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+                        {{--@foreach($data as $v)--}}
+                            {{--<div class="result_wrap">--}}
+                                {{--<h3>{{$v->notice_title}}</h3>--}}
+                                {{--<br>--}}
+                                {{--<ul>--}}
+                                    {{--<p>{!! $v->notice_description !!}</p>--}}
+                                    {{--<a href="{{url('admin/studentnotice/content/'.$v->nid)}}" class="readmore">原文>></a>--}}
+                                 {{--</ul>--}}
+                                {{--<p style="width: 80%" class="dateview">--}}
+                                    {{--<span>{{date("Y-m-d H:i",date($v->notice_time)) }}</span>--}}
+                                    {{--<span>作者：{{$v->notice_editor}}</span>--}}
+                                {{--</p>--}}
+                            {{--</div>--}}
+                        {{--@endforeach--}}
+
+        </div>
+    <!--搜索结果页面 列表 结束-->
+
+    <style>
+        .result_content ul li span{
+            foot-size:15px;
+            padding: 6px 12px;
+        }
+    </style>
+    <script>
+        function delCate(nid) {
+            layer.confirm('您确定要删除这条公告吗？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                $.post("{{url('admin/notice/')}}/"+nid,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+                    if(data.status==0){
+                        layer.msg(data.msg, {icon: 6});
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg, {icon: 5});
+                    }
+                });
+//            layer.msg('的确很重要', {icon: 1});
+            }, function(){
+
+            });
+        }
+        layui.use('element', function(){
+            var element = layui.element;
+
+            //…
+        });
+    </script>
+@endsection

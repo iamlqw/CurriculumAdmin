@@ -11,78 +11,68 @@
     <!--结果页快捷搜索框 结束-->
 
     <!--搜索结果页面 列表 开始-->
-        <div class="result_wrap">
-            <!--快捷导航 开始-->
-            <div class="result_content">
-                <div class="result_title">
-                    <h3>讨论区</h3>
-                </div>
-                <div class="short_wrap">
-                    <a href="{{url('admin/question/create')}}"><i class="fa fa-plus"></i>提问</a>
-                    {{--<a href="{{url('admin/list/batchcreate')}}"><i class="fa fa-plus"></i>批量导入</a>--}}
-                    {{--<a href="#" onclick="batchdel()"><i class="fa fa-recycle"></i>批量删除</a>--}}
-                    {{--<a href="#"><i class="fa fa-refresh"></i>导出成绩单</a>--}}
-                </div>
-            </div>
-            <!--快捷导航 结束-->
-        </div>
-
     <div class="result_wrap">
-        <ul class="tab_title">
-            <li class="active">所有问题</li>
+        <!--快捷导航 开始-->
+        <div class="result_content">
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend>讨论区</legend>
+            </fieldset>
+            <div class="short_wrap">
+                <a href="{{url('admin/question/create')}}"><i class="fa fa-plus"></i>提问</a>
+            </div>
+        </div>
+        <!--快捷导航 结束-->
+    </div>
+
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">所有问题</li>
             <li>我的问题</li>
             <li>知识库</li>
         </ul>
-        <div class="tab_content">
-            <link href="{{asset('resources/views/home/css/index.css')}}" rel="stylesheet">
-            <div>
-                @foreach($data as $v)
-                    <div class="tips">
-                    <h3>{{$v->question_title}}</h3>
-                    <ul>
-                        <p>{!! $v->question_description !!}</p>
-                        <a href="{{url('admin/question/content/'.$v->qid)}}" class="readmore">原文>></a>
-                    </ul>
-                    <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
-                    </div>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <link href="{{asset('resources/views/home/css/index.css')}}" rel="stylesheet">
+                <div>
+                    @foreach($data as $v)
+                        <blockquote class="layui-elem-quote layui-quote-nm">
+                        <h3>{{$v->question_title}}</h3>
+                        <ul>
+                            <p>{!! $v->question_description !!}</p>
+                            <a href="{{url('admin/question/content/'.$v->qid)}}" class="readmore">原文>></a>
+                        </ul>
+                        <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
+                        </blockquote>
+                    @endforeach
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div>
+                @foreach($mydata as $v)
+                    <blockquote class="layui-elem-quote layui-quote-nm">
+                        <h3>{{$v->question_title}}</h3>
+                        <ul>
+                            <p>{!! $v->question_description !!}</p>
+                            <a href="{{url('admin/question/content/'.$v->qid)}}" class="readmore">原文>></a>
+                        </ul>
+                        <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
+                    </blockquote>
                 @endforeach
-            </div>
-            <div class="page_list">
-                {{$data->links()}}
-            </div>
-        </div>
-        <div class="tab_content">
-            <div>
-            @foreach($mydata as $v)
-                <div class="tips">
-                    <h3>{{$v->question_title}}</h3>
-                    <ul>
-                        <p>{!! $v->question_description !!}</p>
-                        <a href="{{url('admin/question/content/'.$v->qid)}}" class="readmore">原文>></a>
-                    </ul>
-                    <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
                 </div>
-            @endforeach
             </div>
-            <div class="page_list">
-                {{$data->links()}}
-            </div>
-        </div>
-        <div class="tab_content">
-            <div>
-            @foreach($kdata as $v)
-                <div class="tips">
-                    <h3>{{$v->question_title}}</h3>
-                    <ul>
-                        <p>{!! $v->question_description !!}</p>
-                        <a href="{{url('admin/question/content/'.$v->qid)}}" class="readmore">原文>></a>
-                    </ul>
-                    <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
+            <div class="layui-tab-item">
+                <div>
+                @foreach($kdata as $v)
+                    <blockquote class="layui-elem-quote layui-quote-nm">
+                        <h3>{{$v->question_title}}</h3>
+                        <ul>
+                            <p>{!! $v->question_description !!}</p>
+                            <a href="{{url('admin/question/content/'.$v->qid)}}" class="readmore">原文>></a>
+                        </ul>
+                        <p style="width: 15%" class="dateview"><span>{{date("Y-m-d H:i",date($v->question_time)) }}</span></p>
+                    </blockquote>
+                @endforeach
                 </div>
-            @endforeach
-            </div>
-            <div class="page_list">
-                {{$kdata->links()}}
             </div>
         </div>
 
@@ -104,5 +94,10 @@
             padding: 6px 12px;
         }
     </style>
+    <script>
+        layui.use('element', function(){
+            var element = layui.element;
 
+        });
+    </script>
 @endsection

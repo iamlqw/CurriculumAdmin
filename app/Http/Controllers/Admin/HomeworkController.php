@@ -18,13 +18,13 @@ class HomeworkController extends CommonController
     //GET admin/answer
     public function index()
     {
-//       $data = Experiment::orderBy('eid','asc')->paginate(5);
+       $data = Experiment::all();
 //
 //       $ansdata = Question::where('question_isanswer','已回答')->orderBy('question_sid','asc')->paginate(10);
 //
 //       $kdata = Question::where('question_isimportant','已入库')->orderBy('question_sid','asc')->paginate(10);compact('data','ansdata','kdata')
 
-        return view('admin.student.homework.list');
+        return view('admin.student.homework.list',compact('data'));
     }
 
 //

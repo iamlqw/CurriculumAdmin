@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.teacheradmin')
 @section('content')
 	<!--头部 开始-->
 	<div class="top_box">

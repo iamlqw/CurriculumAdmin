@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.teacheradmin')
 @section('content')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
