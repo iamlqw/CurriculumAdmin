@@ -17,7 +17,13 @@
             <!--快捷导航 开始-->
             <div class="result_content">
                 <div class="result_title">
-                    <h3>详情</h3>
+                    <h3>{{$field->experiment_name}}</h3>
+                </div>
+                <div class="short_wrap">
+                    <p>实验内容：{{$field->experiment_content}}</p>
+                </div>
+                <div class="short_wrap">
+                    <p>实验资料：<a target="view_window" href="/storage/app/public/uploads/{{$field->experiment_document}}">查看</a></p>
                 </div>
             </div>
             <!--快捷导航 结束-->
@@ -30,32 +36,33 @@
                         <th class="tc">学号</th>
                         <th class="tc">姓名</th>
                         <th class="tc">提交文件</th>
+                        <th class="tc">提交时间</th>
                         <th class="tc">得分</th>
                     </tr>
 
-                {{--@foreach($data as $v)--}}
-                    {{--<tr>--}}
-                        {{--<td class="tc">--}}
-                            {{--{{$v->experiment_name}}--}}
-                        {{--</td>--}}
-                        {{--<td class="tc">--}}
-                            {{--{{$v->experiment_content}}--}}
-                        {{--</td>--}}
-                        {{--<td class="tc">--}}
-                            {{--{{date("Y-m-d H:i",date($v->experiment_starttime))}}--}}
-                        {{--</td>--}}
-                        {{--<td class="tc">--}}
-                            {{--{{date("Y-m-d H:i",date($v->experiment_endtime))}}--}}
-                        {{--</td>--}}
-                        {{--<td>--}}
-                            {{--提交人数：20<a href="">详情</a>--}}
-                        {{--</td>--}}
+                @foreach($data as $v)
+                    <tr>
+                        <td class="tc">
+                            {{$v->student_id}}
+                        </td>
+                        <td class="tc">
+                            {{$v->student_name}}
+                        </td>
+                        <td class="tc">
+                            <a style="padding-left: 45%" href="#">查看</a>
+                        </td>
+                        <td class="tc">
+                            {{date("Y-m-d H:i",date($v->submit_time))}}
+                        </td>
+                        <td class="tc">
+                            {{$v->mark}}
+                        </td>
                         {{--<td>--}}
                             {{--<a href="{{url('admin/experiment/'.$v->eid.'/edit')}}">修改</a>--}}
                             {{--<a href="#" onclick="delCate({{$v->eid}})">删除</a>--}}
                         {{--</td>--}}
-                    {{--</tr>--}}
-                {{--@endforeach--}}
+                    </tr>
+                @endforeach
                 </table>
 
                 {{--<div class="page_list">--}}
@@ -74,7 +81,7 @@
     </style>
     <script>
         function delCate(eid) {
-            layer.confirm('您确定要删除这个学生吗？', {
+            layer.confirm('您确定要删除这个实验吗？', {
                 btn: ['确定','取消'] //按钮
             }, function(){
                 $.post("{{url('admin/experiment/')}}/"+eid,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {

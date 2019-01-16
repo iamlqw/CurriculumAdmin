@@ -21,7 +21,9 @@
                 </div>
                 <div class="short_wrap">
                     <a href="{{url('admin/experiment/create')}}"><i class="fa fa-plus"></i>新增实验</a>
+                    <a href="{{url('admin/experiment/report')}}"><i class="fa fa-refresh"></i>查看成绩单</a>
                 </div>
+
             </div>
             <!--快捷导航 结束-->
         </div>
@@ -30,7 +32,7 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc">实验名称</th>
+                        <th class="tc">第几次实验</th>
                         <th class="tc">实验要求</th>
                         <th class="tc">开始时间</th>
                         <th class="tc">截至日期</th>

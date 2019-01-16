@@ -14,16 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+/**
+ * 测试路由
+ */
 Route::get('/test', 'TestController@index');
-
-
-    Route::get('/', function () {
-        return view('welcome');
-    });
-    Route::any('admin/login', 'Admin\LoginController@login');
-    Route::get('admin/code', 'Admin\LoginController@code');
-    Route::get('/test', 'TestController@index');
-
+/**
+ * 基本路由
+ */
+Route::any('admin/login', 'Admin\LoginController@login');
+Route::get('admin/code', 'Admin\LoginController@code');
 /**
  * 学生组
  */
@@ -39,23 +38,8 @@ Route::group(['middleware'=>['student.login'],'prefix'=>'admin','namespace'=>'Ad
     //提问
     Route::resource('question', 'QuestionController');
     Route::any('question/content/{nid}', 'QuestionController@studentquestion');
-//
-//    Route::post('cate/changeorder', 'ListController@changeOrder');
-//    Route::resource('category', 'ListController');
-//
-//    Route::resource('article', 'NoticeController');
-//
-//    Route::resource('links', 'LinksController');
-//    Route::post('links/changeorder', 'LinksController@changeOrder');
-//
-//    Route::resource('navs', 'NavsController');
-//    Route::post('navs/changeorder', 'navsController@changeOrder');
-//
-//    Route::resource('config', 'ConfigController');
-//    Route::post('config/changeorder', 'ConfigController@changeOrder');
-//    Route::post('config/changecontent', 'ConfigController@changeContent');
-//
-//    Route::any('upload', 'CommonController@upload');
+    //实验作业
+    Route::resource('homework', 'HomeworkController');
 });
 /**
  * 教师组
@@ -77,6 +61,7 @@ Route::group(['middleware'=>['teacher.login'],'prefix'=>'admin','namespace'=>'Ad
     Route::any('answer/content/{qid}', 'AnswerController@content');
     Route::any('answer/intodatabase/{qid}', 'AnswerController@intodatabase');
     //实验
+    Route::any('experiment/report', 'ExperimentController@report');
     Route::resource('experiment', 'ExperimentController');
     Route::any('experiment/content/{eid}', 'ExperimentController@content');
 });

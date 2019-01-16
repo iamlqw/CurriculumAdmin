@@ -40,15 +40,15 @@
             <table class="add_tab">
                 <tbody>
                     <tr>
-                        <th>实验名称：</th>
+                        <th>第几次实验：</th>
                         <td>
-                            <input type="text" class="sm" name="experiment_name">
+                            <input type="text" class="sm" name="experiment_name"><i class="fa fa-exclamation-circle yellow"></i>建议格式：实验一
                         </td>
                     </tr>
                     <tr>
                         <th>实验要求：</th>
                         <td>
-                            <textarea name="experiment_content" id="" cols="30" rows="10"></textarea>
+                            <textarea name="experiment_content" id="" cols="30" rows="10"></textarea><i class="fa fa-exclamation-circle yellow"></i>内容不宜过多
                         </td>
                     </tr>
                     <tr>

@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Model\Experiment;
+use App\Http\Model\Mark;
 use App\Http\Model\Student;
 use App\Http\Model\Teacher;
 use App\Http\Model\User;
@@ -38,8 +39,22 @@ class TestController extends Controller{
 //        dd($student);
 //        dd(Experiment::all());
 //        $re2 = Storage::disk('uploads')->delete('a.txt');
-        $deldata = Experiment::where('eid',11)->get()->toArray();
-        $re2=Storage::disk('uploads')->delete($deldata[0]['experiment_document']);
-        dd($re2);
+//        $deldata = Experiment::where('eid',11)->get()->toArray();
+//        $re2=Storage::disk('uploads')->delete($deldata[0]['experiment_document']);
+//        dd($re2);
+//                $mark = Mark::all();
+//        dd($mark);
+            $student = Student::all()->toArray();
+            $i=1;
+            foreach ($student as $v){
+//                $input['id'] = $i;
+                $input['student_id'] = $v['sid'];
+                $input['experiment_id'] = 17;
+                $input['student_name'] = $v['name'];
+                $input['mark'] = rand(60,100);
+                $input['submit_time'] = time();
+                Mark::create($input);
+                $i++;
+            }
     }
 }
