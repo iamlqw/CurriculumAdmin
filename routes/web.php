@@ -40,6 +40,9 @@ Route::group(['middleware'=>['student.login'],'prefix'=>'admin','namespace'=>'Ad
     Route::any('question/content/{nid}', 'QuestionController@studentquestion');
     //实验作业
     Route::resource('homework', 'HomeworkController');
+    Route::any('homework/submit/{nid}', 'HomeworkController@submit');
+    //教学资料
+    Route::any('coursedata', 'dataController@studentindex');
 });
 /**
  * 教师组
@@ -62,6 +65,10 @@ Route::group(['middleware'=>['teacher.login'],'prefix'=>'admin','namespace'=>'Ad
     Route::any('answer/intodatabase/{qid}', 'AnswerController@intodatabase');
     //实验
     Route::any('experiment/report', 'ExperimentController@report');
+    Route::any('experiment/message/{id}', 'ExperimentController@message');
     Route::resource('experiment', 'ExperimentController');
     Route::any('experiment/content/{eid}', 'ExperimentController@content');
+    //教学资料
+    Route::resource('data', 'dataController');
+
 });

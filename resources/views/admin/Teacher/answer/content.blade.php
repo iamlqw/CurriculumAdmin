@@ -37,7 +37,7 @@
                                     <label>问题描述：</label>
                                 </li>
                                 <li class="show">
-                                    <span>{{$field->question_content}}</span>
+                                    <span>{!! $field->question_content !!}</span>
                                 </li>
                             </ul>
                         </div>
@@ -54,10 +54,6 @@
                         </div>
                     </ul>
                     <p class="nextinfo">
-                        <p style="text-align: center">
-                            <span style=""><a href="{{url('admin/answer/content/'.(($field->qid)-1))}}">上一篇</a></span>
-                            <span style=""><a href="{{url('admin/answer/content/'.(($field->qid)+1))}}">下一篇</a></span>
-                        </p>
                     </div>
                 </div>
             </div>

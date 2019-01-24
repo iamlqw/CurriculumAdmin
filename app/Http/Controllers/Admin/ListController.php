@@ -190,19 +190,5 @@ class ListController extends CommonController
             ];
             return $data;
         }
-
-
     }
-//
-//    public function show()
-//    {
-//
-//    }
-
-
-
-
-
-
-    //
 }

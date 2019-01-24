@@ -18,143 +18,60 @@ class HomeworkController extends CommonController
     //GET admin/answer
     public function index()
     {
-       $data = Experiment::all();
-//
-//       $ansdata = Question::where('question_isanswer','已回答')->orderBy('question_sid','asc')->paginate(10);
-//
-//       $kdata = Question::where('question_isimportant','已入库')->orderBy('question_sid','asc')->paginate(10);compact('data','ansdata','kdata')
+       $data = Experiment::all()->toArray();
+       $time = time();
 
+           for($i=0;$i<count($data,0);$i++){
+               $submit = Mark::where('experiment_id',$data[$i]['eid'])->where('student_id',session('user')['user_name'])->first();
+               if($time<$data) {
+                   if ($submit != null) {
+                       $submit = $submit->toArray();
+                       $re = Storage::disk('uploads')->exists($submit['document']);
+                       if (count($submit, 0) != 0 && $re == true) {
+                           $data[$i]['submit'] = '已提交';
+                           $data[$i]['document'] = $submit['document'];
+                       } else {
+                           $data[$i]['submit'] = '未提交';
+                       }
+                   } else {
+                       $data[$i]['submit'] = '未提交';
+                   }
+               } else {
+                   $data[$i]['submit'] = '已过期';
+               }
+           }
         return view('admin.student.homework.list',compact('data'));
     }
-
+// 提交作业
+    public function submit($eid)
+    {
+        $input=Input::except('_token');
+        $data = Experiment::all();
 //
-//get admin/answer/create
-    public function create()
-    {
-        return view('admin.teacher.experiment.add');
-    }
-//post admin/answer
-    public function store()
-    {
-        $input = Input::except('_token','experiment_document');
-        $input['experiment_starttime'] = time();
-        $rules = [
-            'experiment_name' => 'required',
-            'experiment_content' => 'required',
-            'experiment_endtime' => 'required',
-        ];
-        $massage = [
-            'experiment_name.required'=>'实验题目不能为空',
-            'experiment_content.required'=>'实验要求不能为空',
-            'experiment_endtime'=>'实验截止日期不能为空',
-        ];
-        $validator = Validator::make($input,$rules,$massage);
-        if ($validator->passes()) {
-            $file = Input::file('experiment_document');
-            if($file->isValid()){
-                $ext = $file->getClientOriginalExtension();//文件后缀
-                if($ext=='pdf'){
-                    $newname = $input['experiment_name'].'.'.$ext;//重组文件名
-                    $path = $file->move(base_path().'/storage/app/public/uploads/experiment/experimentName/',$newname);//写入
-                    $input['experiment_document'] = 'experiment/experimentName/'.$newname;
-                }else{
-                    return back()->with('errors','请上传pdf形式文件');
-                }
+        if($input!=null&&$input['source']->isValid()){
+            $ext = $input['source']->getClientOriginalExtension();//文件后缀
+            if($ext=='pdf'){
+                $experiment = Experiment::where('eid',$eid)->get()->toArray();//取出实验名
+                $student = Student::where('sid',session('user')['user_name'])->get()->toArray();
+                $newname = session('user')['user_name'].$experiment[0]['experiment_name'].'.'.$ext;//重组文件名
+                $path = $input['source']->move(base_path().'/storage/app/public/uploads/experiment/experimentReport/',$newname);//写入
+                Mark::where('document', 'experiment/experimentReport/'.$newname)->delete();
+                $mark['document'] = 'experiment/experimentReport/'.$newname;
+                $mark['student_id'] = session('user')['user_name'];
+                $mark['experiment_id'] = $eid;
+                $mark['student_name'] = $student[0]['name'];
+                $mark['submit_time'] = time();
+                Mark::create($mark);
+                return redirect('admin/homework');
             }else{
-                return back()->with('errors','文件必须小于2M');
+                return back()->with('errors','请上传pdf形式文件');
             }
-            $input['experiment_endtime'] = strtotime($input['experiment_endtime']);
-            $re = Experiment::create($input);
-            if ($re){
-                return redirect('admin/experiment');
-            }else{
-                return back()->with('errors','数据未知错误');
-            }
-        } else {
-            return back()->withErrors($validator);
-        }
-    }
-//GET /admin/answer/{photo}/edit
-    public function edit($eid)
-    {
-        $field = Experiment::find($eid);
-        return view('admin.Teacher.experiment.edit',compact('field'));
-    }
-//PUT/PATCH admin/answer/{photo}
-    public function update($eid)
-    {
-        $input = Input::except('_token','experiment_document','_method');
-        $input['experiment_starttime'] = time();
-        $rules = [
-            'experiment_name' => 'required',
-            'experiment_content' => 'required',
-            'experiment_endtime' => 'required',
-        ];
-        $massage = [
-            'experiment_name.required'=>'实验题目不能为空',
-            'experiment_content.required'=>'实验要求不能为空',
-            'experiment_endtime'=>'实验截止日期不能为空',
-        ];
-        $validator = Validator::make($input,$rules,$massage);
-        if ($validator->passes()) {
-            $file = Input::file('experiment_document');
-            if ($file->isValid()) {
-                $ext = $file->getClientOriginalExtension();//文件后缀
-                if($ext=='pdf'){
-                    $newname = $input['experiment_name'] . '.' . $ext;//重组文件名
-                    $path = $file->move(base_path() .'/storage/app/public/uploads/experiment/experimentName/', $newname);//写入
-                    $input['experiment_document'] = 'experiment/experimentName/'.$newname;
-                }else{
-                    return back()->with('errors','请上传pdf形式文件');
-                }
-            } else {
-                return back()->with('errors', '文件必须小于2M');
-            }
-            $input['experiment_endtime'] = strtotime($input['experiment_endtime']);
-            $re = Experiment::where('eid',$eid)->update($input);
-            if ($re) {
-                return redirect('admin/experiment');
-            } else {
-                return back()->with('errors', '数据未知错误');
-            }
-        }
-    }
-
-    public function destroy($eid)
-    {
-            $deldata = Experiment::where('eid',$eid)->get()->toArray();
-            $re2=Storage::disk('uploads')->delete($deldata[0]['experiment_document']);
-            $re1 = Experiment::where('eid',$eid)->delete($eid);
-            if ($re1&&$re2){
-                $data = [
-                    'status' => 0,
-                    'msg' => '成功'
-                ];
-            }else{
-                $data = [
-                    'status' => 1,
-                    'msg' => '失败'
-                ];
-            }
-        return $data;
-    }
-// 展示页
-    public function content($eid)
-    {
-        $field = Experiment::find($eid);
-        $data = Mark::where('experiment_id',$eid)->get();
-        if ($field&&$data){
-            return view('admin.teacher.experiment.content',compact('field','data'));
         }else{
-            return back()->with('errors', '数据未知错误');
+            return back()->with('errors','文件必须小于100M');
         }
+
+//        $data = Mark::where('experiment_id',$eid)->get();
+
     }
 
-    public function report()
-    {
-        $experiment = Experiment::all();
-        $mark = Mark::all();
-        $student = Student::all();
-        return view('admin.teacher.experiment.report',compact('experiment','mark','student'));
-    }
 }

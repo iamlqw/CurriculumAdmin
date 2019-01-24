@@ -25,6 +25,9 @@
                 <div class="short_wrap">
                     <p>实验资料：<a target="view_window" href="/storage/app/public/uploads/{{$field->experiment_document}}">查看</a></p>
                 </div>
+                <div class="short_wrap">
+                    <p>提交人数：{{$data->count()}}</p>
+                </div>
             </div>
             <!--快捷导航 结束-->
         </div>
@@ -49,7 +52,7 @@
                             {{$v->student_name}}
                         </td>
                         <td class="tc">
-                            <a style="padding-left: 45%" href="#">查看</a>
+                            <a style="padding-left: 45%" href="{{url('admin/experiment/message/'.$v->id)}}">批改</a>
                         </td>
                         <td class="tc">
                             {{date("Y-m-d H:i",date($v->submit_time))}}
@@ -57,17 +60,9 @@
                         <td class="tc">
                             {{$v->mark}}
                         </td>
-                        {{--<td>--}}
-                            {{--<a href="{{url('admin/experiment/'.$v->eid.'/edit')}}">修改</a>--}}
-                            {{--<a href="#" onclick="delCate({{$v->eid}})">删除</a>--}}
-                        {{--</td>--}}
                     </tr>
                 @endforeach
                 </table>
-
-                {{--<div class="page_list">--}}
-                    {{--{{$data->links()}}--}}
-                {{--</div>--}}
             </div>
         </div>
     </form>

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use function PHPSTORM_META\type;
 
 class ExperimentController extends CommonController
 {
@@ -61,7 +62,7 @@ class ExperimentController extends CommonController
                     return back()->with('errors','请上传pdf形式文件');
                 }
             }else{
-                return back()->with('errors','文件必须小于2M');
+                return back()->with('errors','文件必须小于100M');
             }
             $input['experiment_endtime'] = strtotime($input['experiment_endtime']);
             $re = Experiment::create($input);
@@ -108,7 +109,7 @@ class ExperimentController extends CommonController
                     return back()->with('errors','请上传pdf形式文件');
                 }
             } else {
-                return back()->with('errors', '文件必须小于2M');
+                return back()->with('errors', '文件必须小于100M');
             }
             $input['experiment_endtime'] = strtotime($input['experiment_endtime']);
             $re = Experiment::where('eid',$eid)->update($input);
@@ -117,6 +118,8 @@ class ExperimentController extends CommonController
             } else {
                 return back()->with('errors', '数据未知错误');
             }
+        }else {
+            return back()->withErrors($validator);
         }
     }
 
@@ -156,5 +159,21 @@ class ExperimentController extends CommonController
         $mark = Mark::all();
         $student = Student::all();
         return view('admin.teacher.experiment.report',compact('experiment','mark','student'));
+    }
+
+    public function message($id)
+    {
+        $input = Input::except('_token');
+        $document = Mark::find($id);
+        if ($input == null){
+            return view('admin.teacher.experiment.message', compact('document'));
+        }else{
+            if($input['mark']>=0&&$input['mark']<=100){
+                Mark::where('id', $id)->update($input);
+                return redirect('admin/experiment/content/' . $document->experiment_id);
+            }else{
+                return back()->with('errors', '分数必须在0-100之间');
+            };
+        }
     }
 }

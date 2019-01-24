@@ -36,7 +36,6 @@
                         <th class="tc">实验要求</th>
                         <th class="tc">开始时间</th>
                         <th class="tc">截至日期</th>
-                        <th class="tc">提交情况</th>
                         <th class="tc">操作</th>
                     </tr>
 
@@ -55,9 +54,7 @@
                             {{date("Y-m-d H:i",date($v->experiment_endtime))}}
                         </td>
                         <td>
-                            提交人数：20<a href="{{url('admin/experiment/content/'.$v->eid)}}">详情</a>
-                        </td>
-                        <td>
+                            <a href="{{url('admin/experiment/content/'.$v->eid)}}">详情</a>
                             <a href="{{url('admin/experiment/'.$v->eid.'/edit')}}">修改</a>
                             <a href="#" onclick="delCate({{$v->eid}})">删除</a>
                         </td>

@@ -14,11 +14,11 @@ class AnswerController extends CommonController
     //GET admin/answer
     public function index()
     {
-       $data = Question::where('question_isanswer','未回答')->orderBy('question_sid','asc')->paginate(10);
+       $data = Question::where('question_isanswer','未回答')->orderBy('question_time','dsc')->paginate(10000);
 
-       $ansdata = Question::where('question_isanswer','已回答')->orderBy('question_sid','asc')->paginate(10);
+       $ansdata = Question::where('question_isanswer','已回答')->orderBy('question_time','dsc')->paginate(10000);
 
-       $kdata = Question::where('question_isimportant','已入库')->orderBy('question_sid','asc')->paginate(10);
+       $kdata = Question::where('question_isimportant','已入库')->orderBy('question_time','dsc')->paginate(10000);
 
         return view('admin.teacher.answer.list',compact('data','ansdata','kdata'));
     }
@@ -67,13 +67,9 @@ class AnswerController extends CommonController
         $input = Input::except('_token','_method');
         $input['question_isanswer'] = '已回答';
         $rules = [
-            'question_title' => 'required',
-            'question_content' => 'required',
             'question_answer' => 'required'
         ];
         $massage = [
-            'question_title.required'=>'标题不能为空',
-            'question_content.required'=>'问题内容不能为空',
             'question_answer.required'=>'问题回答不能为空',
         ];
         $validator = Validator::make($input,$rules,$massage);
@@ -84,6 +80,8 @@ class AnswerController extends CommonController
             } else {
                 return back()->with('errors', '数据未知错误');
             }
+        } else {
+                return back()->withErrors($validator);
         }
     }
 

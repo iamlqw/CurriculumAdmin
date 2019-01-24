@@ -13,21 +13,15 @@ class QuestionController extends CommonController
 {
     public function index()
     {
-       $data = Question::where('question_isanswer','已回答')->orderBy('question_sid','asc')->paginate(5);
+       $data = Question::where('question_isanswer','已回答')->orderBy('question_time','dsc')->paginate(10000);
 
-       $mydata = Question::where('question_sid',session('user')['user_name'])->orderBy('question_sid','asc')->paginate(5);
+       $mydata = Question::where('question_sid',session('user')['user_name'])->orderBy('question_time','dsc')->paginate(10000);
 
-       $kdata = Question::where('question_isimportant','已入库')->orderBy('question_sid','asc')->paginate(5);
+       $kdata = Question::where('question_isimportant','已入库')->orderBy('question_time','dsc')->paginate(10000);
 
         return view('admin.student.question.list',compact('data','mydata','kdata'));
     }
-//    public function studentindex()
-//    {
-//        $data = Notice::orderBy('nid','asc')->paginate(5)->with('data',$data);
-////       dd($data);
-//        return view('admin.student.notice.list')->with('data',$data);
-//    }
-//
+
 //get admin/question/create
     public function create()
     {
@@ -59,56 +53,7 @@ class QuestionController extends CommonController
             return back()->withErrors($validator);
         }
     }
-//
-//    public function edit($art_id)
-//    {
-//        $data = (new Category)->tree();
-//        $field = Notice::find($art_id);
-//        return view('admin.article.edit',compact('data','field'));
-//    }
-//
-//    public function update($art_id)
-//    {
-//        $input = Input::except('_token','_method');
-//        $re = Notice::where('art_id',$art_id)->update($input);
-//        if($re){
-//            return redirect("admin/article");
-//        }else{
-//            return back()->with('errors','数据未知错误');
-//        }
-//
-//    }
-//
-//    public function destroy($nid)
-//    {
-//        $re = Notice::where('nid',$nid)->delete($nid);
-//        if ($re){
-//            $data = [
-//                'status' => 0,
-//                'msg' => '成功'
-//            ];
-//        }else{
-//            $data = [
-//                'status' => 1,
-//                'msg' => '失败'
-//            ];
-//        }
-//        return $data;
-//    }
-//    //
-//    public function content($nid)
-//    {
-//        if ($nid<1){
-//            return back();
-//        }else{
-//            $field = Notice::find($nid);
-//            if ($field){
-//                return view('admin.teacher.notice.content',compact('field'));
-//            }else{
-//                return back();
-//            }
-//        }
-//    }
+
     public function studentquestion($qid)
     {
         if ($qid<1){

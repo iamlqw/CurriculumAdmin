@@ -3,7 +3,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/teacherinfo')}}">首页</a> &raquo; <a href="{{url('admin/notice')}}">公告页</a> &raquo; 新建公告
+        <i class="fa fa-home"></i> <a href="{{url('admin/teacherinfo')}}">首页</a> &raquo; <a href="{{url('admin/answer')}}">讨论区</a> &raquo; 回答
     </div>
     <!--面包屑导航 结束-->
 
@@ -35,17 +35,17 @@
                     <tr>
                         <th width="120">标题：</th>
                         <td>
-                            <input type="text" class="lg" name="question_title" value="{{$field->question_title}}">
+                            <span>{{$field->question_title}}</span>
                         </td>
                     </tr>
                     <tr>
                         <th width="120">问题内容：</th>
                         <td>
-                            <textarea name="question_content" cols="30" rows="10">{{$field->question_content}}</textarea>
+                            <span>{!! $field->question_content !!}</span>
                         </td>
                     </tr>
                     <tr>
-                        <th>问题内容：</th>
+                        <th>回答：</th>
                         <td>
                             <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.config.js')}}"></script>
                             <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.all.min.js')}}"> </script>

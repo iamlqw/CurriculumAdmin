@@ -41,10 +41,6 @@
                         </div>
                     </ul>
                     <p class="nextinfo">
-                        <p style="text-align: center">
-                            <span style=""><a href="{{url('admin/studentnotice/content/'.(($field->nid)-1))}}">上一篇</a></span>
-                            <span style=""><a href="{{url('admin/studentnotice/content/'.(($field->nid)+1))}}">下一篇</a></span>
-                        </p>
                     </div>
                 </div>
             </div>

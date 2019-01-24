@@ -18,9 +18,6 @@
                 <div class="result_title">
                     <h3>操作</h3>
                 </div>
-                <div class="short_wrap">
-                    <a href="#"><i class="fa fa-plus"></i>导出</a>
-                </div>
             </div>
             <!--快捷导航 结束-->
         </div>

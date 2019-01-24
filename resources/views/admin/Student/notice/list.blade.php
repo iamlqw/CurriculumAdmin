@@ -13,10 +13,14 @@
     <!--搜索结果页面 列表 开始-->
     <form action="#" method="post">
         <!--快捷导航 开始-->
-        <div class="result_content">
-            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-                <legend>公告</legend>
-            </fieldset>
+        <div class="result_wrap">
+            <!--快捷导航 开始-->
+            <div class="result_content">
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                    <legend>公告</legend>
+                </fieldset>
+            </div>
+            <!--快捷导航 结束-->
         </div>
 
         <div class="result_wrap">

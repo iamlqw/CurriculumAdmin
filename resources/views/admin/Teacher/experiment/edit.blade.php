@@ -11,26 +11,7 @@
 	<div class="result_wrap">
         <div class="result_title">
             <h3><i class="fa fa-plus"></i>修改实验<br></h3>
-            {{--@if($errors!=null)--}}
-                {{--<div class="mark">--}}
-                    {{--@if(is_object($errors))--}}
-                        {{--@foreach($errors->all() as $error)--}}
-                            {{--<p>{{$error}}</p>--}}
-                        {{--@endforeach--}}
-                    {{--@else--}}
-                        {{--<p>{{$errors}}</p>--}}
-                    {{--@endif--}}
-                {{--</div>--}}
-            {{--@endif--}}
         </div>
-        {{--<div class="result_content">--}}
-            {{--<div class="short_wrap">--}}
-                {{--<a href="{{url('admin/list/create')}}"><i class="fa fa-plus"></i>新增学生</a>--}}
-                {{--<a href="#"><i class="fa fa-refresh"></i>批量导入</a>--}}
-                {{--<a href="#"><i class="fa fa-recycle"></i>批量删除</a>--}}
-                {{--<a href="#"><i class="fa fa-refresh"></i>导出成绩单</a>--}}
-            {{--</div>--}}
-        {{--</div>--}}
     </div>
     <!--结果集标题与导航组件 结束-->
     
@@ -50,7 +31,7 @@
                         <th>实验要求：</th>
                         <td>
                             <textarea name="experiment_content" id="" cols="30" rows="10">{{$field->experiment_content}}</textarea>
-                            <i class="fa fa-exclamation-circle yellow"></i>内容不宜过多
+                            <i class="fa fa-exclamation-circle yellow"></i>简述实验内容
                         </td>
                     </tr>
                     <tr>
