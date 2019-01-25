@@ -65,6 +65,7 @@ class TestController extends Controller{
 //        foreach ($delreport as $v){
 //            Storage::disk('uploads')->delete($v->document);
 //        }
+        User::insert(['user_name'=>1234567,'user_pass'=>Crypt::encrypt(1234567),'user_identity'=>'teacher']);
 
     }
 }

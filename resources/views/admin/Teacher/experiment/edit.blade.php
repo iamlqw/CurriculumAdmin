@@ -50,8 +50,9 @@
                     </tr>
                     <tr>
                         <th>实验任务书：</th>
+                        <td><label for=""><input id="fileChange" type="checkbox">是否需要修改？</label></td>
                         <td>
-                            <input value="/storage/app/public/uploads/{{$field->experiment_document}}" id="file" type="file" class="form-control" name="experiment_document" required>
+                            <input id="file" type="hidden" class="form-control" name="experiment_document" required>
                         </td>
                     </tr>
                     <tr>
@@ -65,6 +66,16 @@
             </table>
         </form>
     </div>
-
+    <script>
+        $(function () {
+            $('#fileChange').click(function () {
+                if ($('#file').attr("type") == 'hidden') {
+                    $('#file').attr("type", "file");
+                } else {
+                    $('#file').attr("type", "hidden");
+                }
+            })
+        })
+    </script>
 
 @endsection

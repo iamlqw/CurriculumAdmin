@@ -12,7 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(session('user')&&session('user')['user_identity']=='teacher'){
+        return redirect('admin/teacherindex');
+    }elseif(session('user')&&session('user')['user_identity']=='student'){
+        return redirect('admin/studentindex');
+    }else{
+        return redirect('admin/login');
+    }
 });
 /**
  * 测试路由

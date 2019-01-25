@@ -54,7 +54,7 @@
                             {{date("Y-m-d H:i",date($v->experiment_endtime))}}
                         </td>
                         <td>
-                            <a href="{{url('admin/experiment/content/'.$v->eid)}}">详情</a>
+                            <a style="padding-left: 25%" href="{{url('admin/experiment/content/'.$v->eid)}}">详情</a>
                             <a href="{{url('admin/experiment/'.$v->eid.'/edit')}}">修改</a>
                             <a href="#" onclick="delCate({{$v->eid}})">删除</a>
                         </td>

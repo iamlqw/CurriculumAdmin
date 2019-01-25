@@ -74,14 +74,10 @@ class ListController extends CommonController
 //                                continue;
                                 return back()->with('errors',$data['sid'].'学号学生存在');
                             }
-                            try{
-                                DB::transaction(function () use(&$data){
-                                    Student::create($data);
-                                    User::insert(['user_name'=>$data['sid'],'user_pass'=>Crypt::encrypt($data['sid']),'user_identity'=>'student']);
-                                });
-                            } catch (Exception $e){
-                                return back()->with('errors','数据未知错误');
-                            }
+                            DB::transaction(function () use(&$data){
+                                Student::create($data);
+                                User::insert(['user_name'=>$data['sid'],'user_pass'=>Crypt::encrypt($data['sid']),'user_identity'=>'student']);
+                            });
                         } else {
                             return back()->withErrors($validator);
                         }

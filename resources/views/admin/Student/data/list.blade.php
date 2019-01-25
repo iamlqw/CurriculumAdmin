@@ -26,8 +26,10 @@
                 @if($v->data_father_id==0)
                 <div class="layui-colla-item">
                     <h2 class="layui-colla-title">{{$v->data_chapter}}
-                        <a target="view_window" style="padding-left: 80%" href="/storage/app/public/uploads/{{$v->data_pdfpath}}">课件</a>
-                        <a href="{{url('admin/coursedata/video/'.$v->did)}}">视频</a>
+                        <div style="float: right">
+                            <a target="view_window"href="/storage/app/public/uploads/{{$v->data_pdfpath}}">课件</a>
+                            <a  href="{{url('admin/coursedata/video/'.$v->did)}}">视频</a>
+                        </div>
                     </h2>
                     <div class="layui-colla-content layui-show">
                         @foreach($data as $w)

@@ -58,7 +58,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>资料：</th>
+                        <th>资料(可选)：</th>
                         <td>
                             <label for=""><input id="pdfChange" type="checkbox">课件（pdf）</label>
                             <label for=""><input id="videoChange" type="checkbox">视频（wmv、avi、mp4,视频必须小于100M）</label>

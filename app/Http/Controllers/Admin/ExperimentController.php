@@ -94,17 +94,19 @@ class ExperimentController extends CommonController
         $validator = Validator::make($input,$rules,$massage);
         if ($validator->passes()) {
             $file = Input::file('experiment_document');
-            if ($file->isValid()) {
-                $ext = $file->getClientOriginalExtension();//文件后缀
-                if($ext=='pdf'){
-                    $newname = $input['experiment_name'] . '.' . $ext;//重组文件名
-                    $path = $file->move(base_path() .'/storage/app/public/uploads/experiment/experimentName/', $newname);//写入
-                    $input['experiment_document'] = 'experiment/experimentName/'.$newname;
-                }else{
-                    return back()->with('errors','请上传pdf形式文件');
+            if($file){
+                if ($file->isValid()) {
+                    $ext = $file->getClientOriginalExtension();//文件后缀
+                    if($ext=='pdf'){
+                        $newname = $input['experiment_name'] . '.' . $ext;//重组文件名
+                        $path = $file->move(base_path() .'/storage/app/public/uploads/experiment/experimentName/', $newname);//写入
+                        $input['experiment_document'] = 'experiment/experimentName/'.$newname;
+                    }else{
+                        return back()->with('errors','请上传pdf形式文件');
+                    }
+                } else {
+                    return back()->with('errors', '文件必须小于100M');
                 }
-            } else {
-                return back()->with('errors', '文件必须小于100M');
             }
             $input['experiment_endtime'] = strtotime($input['experiment_endtime']);
             $re = Experiment::where('eid',$eid)->update($input);

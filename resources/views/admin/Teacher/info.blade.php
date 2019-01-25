@@ -34,9 +34,6 @@
                 <li>
                     <label>职称</label><span>{{$user->title}}</span>
                 </li>
-                <li>
-                    <label>邮箱</label><span>{{$user->email}}</span>
-                </li>
             </ul>
         </div>
     </div>

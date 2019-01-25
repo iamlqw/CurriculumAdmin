@@ -8,25 +8,6 @@
     <!--面包屑导航 结束-->
 
 	<!--结果页快捷搜索框 开始-->
-	{{--<div class="search_wrap">--}}
-        {{--<form action="" method="post">--}}
-            {{--<table class="search_tab">--}}
-                {{--<tr>--}}
-                    {{--<th width="120">选择分类:</th>--}}
-                    {{--<td>--}}
-                        {{--<select onchange="javascript:location.href=this.value;">--}}
-                            {{--<option value="">全部</option>--}}
-                            {{--<option value="http://www.baidu.com">百度</option>--}}
-                            {{--<option value="http://www.sina.com">新浪</option>--}}
-                        {{--</select>--}}
-                    {{--</td>--}}
-                    {{--<th width="70">关键字:</th>--}}
-                    {{--<td><input type="text" name="keywords" placeholder="关键字"></td>--}}
-                    {{--<td><input type="submit" name="sub" value="查询"></td>--}}
-                {{--</tr>--}}
-            {{--</table>--}}
-        {{--</form>--}}
-    {{--</div>--}}
     <!--结果页快捷搜索框 结束-->
 
     <!--搜索结果页面 列表 开始-->
@@ -54,13 +35,9 @@
                         <th class="tc">学生姓名</th>
                         <th class="tc">学号</th>
                         <th class="tc">性别</th>
-                        <th>专业</th>
-                        <th>班级</th>
-                        <th>实验一成绩</th>
-                        <th>实验二成绩</th>
-                        <th>实验三成绩</th>
-                        <th>实验四成绩</th>
-                        <th>操作</th>
+                        <th class="tc">专业</th>
+                        <th class="tc">班级</th>
+                        <th class="tc">操作</th>
                     </tr>
 
                 @foreach($data as $v)
@@ -73,20 +50,16 @@
                             {{$v->sid}}
                         </td>
                         <td class="tc">
-                            {{$v->sex==0?'男':'女'}}
+                            {{$v->sex}}
                         </td>
-                        <td>
+                        <td  class="tc">
                             {{$v->major}}
                         </td>
-                        <td>
+                        <td  class="tc">
                             {{$v->class}}
                         </td>
-                        <td>2</td>
-                        <td>admin</td>
-                        <td>2014-03-15 21:11:01</td>
-                        <td></td>
-                        <td>
-                            <a href="{{url('admin/list/'.$v->sid.'/edit')}}">修改</a>
+                        <td  class="tc">
+                            <a style="padding-left: 33%" href="{{url('admin/list/'.$v->sid.'/edit')}}">修改</a>
                             <a href="#" onclick="delCate({{$v->sid}})">删除</a>
                         </td>
                     </tr>

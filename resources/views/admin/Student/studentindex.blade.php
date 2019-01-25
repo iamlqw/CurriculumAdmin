@@ -4,7 +4,7 @@
 	<div class="top_box">
 		<div class="layui-anim layui-anim-fadein">
 			<div class="top_left">
-				<div class="logo">学生后台管理模板</div>
+				<div class="logo">课程管理平台</div>
 				<ul>
 					<li><a href="{{url('admin/studentindex')}}" class="active">首页</a></li>
 				</ul>

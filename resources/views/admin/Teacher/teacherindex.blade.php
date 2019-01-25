@@ -5,7 +5,7 @@
 	<!--头部 开始-->
 	<div class="top_box">
 		<div class="top_left">
-			<div class="logo">教师后台管理模板</div>
+			<div class="logo">教师后台管理</div>
 			<ul>
 				<li><a href="{{url('admin/teacherindex')}}" class="active">首页</a></li>
 			</ul>
