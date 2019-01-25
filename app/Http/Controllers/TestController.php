@@ -59,8 +59,12 @@ class TestController extends Controller{
 //            }
 //        $data = Data::all();
 //        dd($data);
-        $deldata = Data::where('did',1)->get()->toArray();
-        dd($deldata);
+//        $deldata = Data::where('did',1)->get()->toArray();
+//        dd($deldata);
+//        $delreport = Mark::where('experiment_id',17)->get();
+//        foreach ($delreport as $v){
+//            Storage::disk('uploads')->delete($v->document);
+//        }
 
     }
 }

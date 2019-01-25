@@ -19,7 +19,6 @@
                         @endforeach
                     @else
                         <p>{{$errors}}</p>
-                        <p id="error">{{$errors}}</p>
                     @endif
                 </div>
             @endif

@@ -47,7 +47,9 @@
                                 @endif
                             </td>
                             <td class="tc">
-                                {{$v->data_videopath}}
+                                @if($v->data_videopath!=null)
+                                    <a style="padding-left: 40%" href="{{url('admin/data/video/'.$v->did)}}">查看</a>
+                                @endif
                             </td>
                             <td>
                                 <a style="padding-left: 35%" href="{{url('admin/data/'.$v->did.'/edit')}}">修改</a>

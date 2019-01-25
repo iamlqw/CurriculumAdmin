@@ -46,7 +46,7 @@
                             {{$v->sid}}
                         </td>
                         <td class="tc">
-                            {{$v->sex==0?'男':'女'}}
+                            {{$v->sex}}
                         </td >
                         <td class="tc">
                             {{$v->major}}

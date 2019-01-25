@@ -13,19 +13,19 @@
         <div class="result_content">
             <ul>
                 <li>
-                    <label>姓名</label><span>{{$user['name']}}</span>
+                    <label>姓名</label><span>{{$user->name}}</span>
                 </li>
                 <li>
-                    <label>性别</label><span>{{$user['sex']}}</span>
+                    <label>性别</label><span>{{$user->sex}}</span>
                 </li>
                 <li>
-                    <label>学号</label><span>{{$user['sid']}}</span>
+                    <label>学号</label><span>{{$user->sid}}</span>
                 </li>
                 <li>
-                    <label>专业</label><span>{{$user['major']}}</span>
+                    <label>专业</label><span>{{$user->major}}</span>
                 </li>
                 <li>
-                    <label>班级</label><span>{{$user['class']}}</span>
+                    <label>班级</label><span>{{$user->class}}</span>
                 </li>
             </ul>
         </div>
@@ -38,15 +38,11 @@
         </div>
         <div class="result_content">
             <ul>
+                @foreach($info as $v)
                 <li>
-                    <label>老师办公室：</label><span><a href="#">http://bbs.houdunwang.com</a></span>
+                    <label>{{$v->information_name}}</label><span>{{$v->information_value}}</span>
                 </li>
-                <li>
-                    <label>公共邮箱：</label><span><a href="#">http://bbs.houdunwang.com</a></span>
-                </li>
-                <li>
-                    <label>课堂微信群：</label><span><a href="#"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png"></a></span>
-                </li>
+                @endforeach
             </ul>
         </div>
     </div>

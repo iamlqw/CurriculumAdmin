@@ -125,20 +125,25 @@ class ExperimentController extends CommonController
 
     public function destroy($eid)
     {
-            $deldata = Experiment::where('eid',$eid)->get()->toArray();
-            $re2=Storage::disk('uploads')->delete($deldata[0]['experiment_document']);
-            $re1 = Experiment::where('eid',$eid)->delete($eid);
-            if ($re1&&$re2){
-                $data = [
-                    'status' => 0,
-                    'msg' => '成功'
-                ];
-            }else{
-                $data = [
-                    'status' => 1,
-                    'msg' => '失败'
-                ];
-            }
+        $deldata = Experiment::where('eid',$eid)->get()->toArray();
+        $re2=Storage::disk('uploads')->delete($deldata[0]['experiment_document']);
+        $re1 = Experiment::where('eid',$eid)->delete($eid);
+        $delreport = Mark::where('experiment_id',$eid)->get();
+        foreach ($delreport as $v){
+            Storage::disk('uploads')->delete($v->document);
+        }
+        $re3 = Mark::where('experiment_id',$eid)->delete();
+        if ($re1&&$re2&&$re3){
+            $data = [
+                'status' => 0,
+                'msg' => '成功'
+            ];
+        }else{
+            $data = [
+                'status' => 1,
+                'msg' => '失败'
+            ];
+        }
         return $data;
     }
 // 展示页

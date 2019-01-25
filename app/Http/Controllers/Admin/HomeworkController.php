@@ -48,30 +48,31 @@ class HomeworkController extends CommonController
         $input=Input::except('_token');
         $data = Experiment::all();
 //
-        if($input!=null&&$input['source']->isValid()){
-            $ext = $input['source']->getClientOriginalExtension();//文件后缀
-            if($ext=='pdf'){
-                $experiment = Experiment::where('eid',$eid)->get()->toArray();//取出实验名
-                $student = Student::where('sid',session('user')['user_name'])->get()->toArray();
-                $newname = session('user')['user_name'].$experiment[0]['experiment_name'].'.'.$ext;//重组文件名
-                $path = $input['source']->move(base_path().'/storage/app/public/uploads/experiment/experimentReport/',$newname);//写入
-                Mark::where('document', 'experiment/experimentReport/'.$newname)->delete();
-                $mark['document'] = 'experiment/experimentReport/'.$newname;
-                $mark['student_id'] = session('user')['user_name'];
-                $mark['experiment_id'] = $eid;
-                $mark['student_name'] = $student[0]['name'];
-                $mark['submit_time'] = time();
-                Mark::create($mark);
-                return redirect('admin/homework');
-            }else{
-                return back()->with('errors','请上传pdf形式文件');
+        if($input!=null) {
+            if ($input['source']->isValid()) {
+                $ext = $input['source']->getClientOriginalExtension();//文件后缀
+                if ($ext == 'pdf') {
+                    $experiment = Experiment::where('eid', $eid)->get()->toArray();//取出实验名
+                    $student = Student::where('sid', session('user')['user_name'])->get()->toArray();
+                    $newname = session('user')['user_name'] . $experiment[0]['experiment_name'] . '.' . $ext;//重组文件名
+                    $path = $input['source']->move(base_path() . '/storage/app/public/uploads/experiment/experimentReport/', $newname);//写入
+                    Mark::where('document', 'experiment/experimentReport/' . $newname)->delete();
+                    $mark['document'] = 'experiment/experimentReport/' . $newname;
+                    $mark['student_id'] = session('user')['user_name'];
+                    $mark['experiment_id'] = $eid;
+                    $mark['student_name'] = $student[0]['name'];
+                    $mark['submit_time'] = time();
+                    Mark::create($mark);
+                    return redirect('admin/homework');
+                } else {
+                    return back()->with('errors', '请上传pdf形式文件');
+                }
+            } else {
+                return back()->with('errors', '文件必须小于100M');
             }
         }else{
-            return back()->with('errors','文件必须小于100M');
+            return view('admin.student.homework.submit');
         }
-
-//        $data = Mark::where('experiment_id',$eid)->get();
-
     }
 
 }

@@ -3,7 +3,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; 实验
+        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; 教学资料
     </div>
     <!--面包屑导航 结束-->
 
@@ -16,24 +16,28 @@
             <!--快捷导航 开始-->
             <div class="result_content">
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-                    <legend>实验</legend>
+                    <legend>教学资料</legend>
                 </fieldset>
             </div>
             <!--快捷导航 结束-->
         </div>
         <div class="layui-collapse">
             @foreach($data as $v)
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title">{{$v['experiment_name']}}({{$v['submit']}})&nbsp;@if($v['submit']=='已提交')<a href="/storage/app/public/uploads/{{$v['document']}}" target="view_window">查看</a>@endif</h2>
-                <div class="layui-colla-content layui-show">
-                    实验要求：{{$v['experiment_content']}}<br>
-                    截止日期：{{date("Y-m-d H:i",date($v['experiment_endtime']))}}<br>
-                    @if($v['submit']!='已过期')
-                        <a id="submit" target="view_window" href="/storage/app/public/uploads/{{$v['experiment_document']}}">实验文件</a>
-                        <a id="submit" href="{{url('admin/homework/submit/'.$v['eid'])}}">提交作业</a>
-                    @endif
+                @if($v->data_father_id==0)
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">{{$v->data_chapter}}
+                        <a style="padding-left: 80%" href="/storage/app/public/uploads/{{$v['data_pdfpath']}}">课件</a>
+                        <a href="{{url('admin/coursedata/video/'.$v->did)}}">视频</a>
+                    </h2>
+                    <div class="layui-colla-content layui-show">
+                        @foreach($data as $w)
+                            @if($w->data_father_id==$v->did)
+                                <blockquote class="layui-elem-quote layui-quote-nm">{{$w->data_chapter}}</blockquote>
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
-            </div>
+                @endif
             @endforeach
         </div>
     </div>
@@ -50,5 +54,8 @@
 
     </style>
     <script>
+        layui.use('element', function(){
+            var element = layui.element;
+        });
     </script>
 @endsection

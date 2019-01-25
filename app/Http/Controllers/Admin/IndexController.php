@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Model\Information;
 use App\Http\Model\Student;
 use App\Http\Model\Teacher;
 use App\Http\Model\User;
@@ -15,25 +16,62 @@ class IndexController extends CommonController
 {
     public function teacherindex()
     {
+//        $newnotice = false;
+//        $newanswer = false;
+//        $new = false;
         $user = session('user')['user_name'];
        return view('admin.teacher.teacherindex')->with('user',$user);
     }
+
     public function studentindex()
     {
         $user = session('user')['user_name'];
-        return view('admin..student.studentindex')->with('user',$user);
+        return view('admin.student.studentindex')->with('user',$user);
     }
+
     public function teacherinfo()
     {
-        $user = Teacher::where('tid',session('user')['user_name'])->get()->toArray();
-//        dd($user[0]);
-        return view('admin.Teacher.info')->with('user',$user[0]);
+        $user = Teacher::find(session('user')['user_name']);
+        $info = Information::all();
+        return view('admin.Teacher.info',compact('user','info'));
     }
+
+    public function create()
+    {
+        return view('admin.teacher.add');
+    }
+
+    public function store()
+    {
+        $input = Input::except('_token');
+        $rules = [
+            'information_name' => 'required',
+            'information_value' => 'required',
+        ];
+        $massage = [
+            'information_name.required'=>'信息名称不能为空',
+            'information_value.required'=>'信息不能为空',
+        ];
+        $validator = Validator::make($input,$rules,$massage);
+        if ($validator->passes()) {
+            $re = Information::create($input);
+            if ($re){
+                return redirect('admin/teacherinfo');
+            }else{
+                return back()->with('errors','数据未知错误');
+            }
+        } else {
+            return back()->withErrors($validator);
+        }
+    }
+
     public function studentinfo()
     {
-        $user = Student::where('sid',session('user')['user_name'])->get()->toArray();
-        return view('admin.Student.info')->with('user',$user[0]);
+        $user = Student::find(session('user')['user_name']);
+        $info = Information::all();
+        return view('admin.Student.info',compact('user','info'));
     }
+
     public function pass()
     {
         if ($input = Input::all()) {

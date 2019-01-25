@@ -42,7 +42,8 @@ Route::group(['middleware'=>['student.login'],'prefix'=>'admin','namespace'=>'Ad
     Route::resource('homework', 'HomeworkController');
     Route::any('homework/submit/{nid}', 'HomeworkController@submit');
     //教学资料
-    Route::any('coursedata', 'dataController@studentindex');
+    Route::any('coursedata', 'DataController@studentindex');
+    Route::any('coursedata/video/{did}', 'DataController@video');
 });
 /**
  * 教师组
@@ -51,6 +52,8 @@ Route::group(['middleware'=>['teacher.login'],'prefix'=>'admin','namespace'=>'Ad
     //基本操作
     Route::get('teacherindex', 'IndexController@teacherindex');
     Route::get('teacherinfo', 'IndexController@teacherinfo');
+    Route::any('teacherinfo/create', 'IndexController@create');
+    Route::post('teacherinfo', 'IndexController@store');
     Route::get('teacherquit', 'LoginController@quit');
     Route::any('teacherpass', 'IndexController@pass');
     //学生导入
@@ -69,6 +72,7 @@ Route::group(['middleware'=>['teacher.login'],'prefix'=>'admin','namespace'=>'Ad
     Route::resource('experiment', 'ExperimentController');
     Route::any('experiment/content/{eid}', 'ExperimentController@content');
     //教学资料
-    Route::resource('data', 'dataController');
+    Route::any('data/video/{did}', 'DataController@video');
+    Route::resource('data', 'DataController');
 
 });
