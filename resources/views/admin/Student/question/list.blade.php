@@ -50,7 +50,12 @@
                 <div>
                 @foreach($mydata as $v)
                     <blockquote class="layui-elem-quote layui-quote-nm">
-                        <h3>{{$v->question_title}}</h3>
+                        <h3>
+                            {{$v->question_title}}[{{$v->question_isanswer}}]
+                            @if($v->question_isread==0&&$v->question_isanswer=='已回答')
+                                <span class="layui-badge-dot"></span>
+                            @endif
+                        </h3>
                         <ul>
                             <p>{!! $v->question_description !!}</p>
                             <a href="{{url('admin/question/content/'.$v->qid)}}" class="readmore">原文>></a>

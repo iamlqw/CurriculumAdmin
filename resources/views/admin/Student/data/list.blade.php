@@ -26,13 +26,17 @@
                 @if($v->data_father_id==0)
                 <div class="layui-colla-item">
                     <h2 class="layui-colla-title">{{$v->data_chapter}}
-                        <a style="padding-left: 80%" href="/storage/app/public/uploads/{{$v['data_pdfpath']}}">课件</a>
+                        <a target="view_window" style="padding-left: 80%" href="/storage/app/public/uploads/{{$v->data_pdfpath}}">课件</a>
                         <a href="{{url('admin/coursedata/video/'.$v->did)}}">视频</a>
                     </h2>
                     <div class="layui-colla-content layui-show">
                         @foreach($data as $w)
                             @if($w->data_father_id==$v->did)
-                                <blockquote class="layui-elem-quote layui-quote-nm">{{$w->data_chapter}}</blockquote>
+                                <blockquote class="layui-elem-quote layui-quote-nm">
+                                    {{$w->data_chapter}}
+                                    <a target="view_window" style="padding-left: 85%" href="/storage/app/public/uploads/{{$w['data_pdfpath']}}">课件</a>
+                                    <a href="{{url('admin/coursedata/video/'.$w->did)}}">视频</a>
+                                </blockquote>
                             @endif
                         @endforeach
                     </div>

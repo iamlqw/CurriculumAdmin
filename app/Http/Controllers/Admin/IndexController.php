@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Model\Experiment;
 use App\Http\Model\Information;
+use App\Http\Model\Notice;
+use App\Http\Model\Question;
 use App\Http\Model\Student;
 use App\Http\Model\Teacher;
 use App\Http\Model\User;
@@ -16,17 +19,40 @@ class IndexController extends CommonController
 {
     public function teacherindex()
     {
-//        $newnotice = false;
-//        $newanswer = false;
-//        $new = false;
         $user = session('user')['user_name'];
-       return view('admin.teacher.teacherindex')->with('user',$user);
+        $newquestion = 0;
+        $question = Question::all();
+        foreach ($question as $v){
+//            dd($v->question_isanswer);
+            if ($v->question_isanswer=='未回答')
+                $newquestion++;
+        }
+       return view('admin.teacher.teacherindex',compact('user','newquestion'));
     }
 
     public function studentindex()
     {
         $user = session('user')['user_name'];
-        return view('admin.student.studentindex')->with('user',$user);
+        //新消息提示
+        $newnotice = 0;
+        $notice = Notice::all();
+        foreach ($notice as $v){
+            if ($v->notice_isread==0)
+                $newnotice++;
+        }
+        $newexp = 0;
+        $experiment = Experiment::all();
+        foreach ($experiment as $v){
+            if ($v->experiment_isread==0)
+                $newexp++;
+        }
+        $newanswer = 0;
+        $answer = Question::all();
+        foreach ($answer as $v){
+            if ($v->question_isread==0&&$v->question_sid==session('user')['user_name']&&$v->question_isanswer=='已回答')
+                $newanswer++;
+        }
+        return view('admin.student.studentindex',compact('user','newnotice','newexp','newanswer'));
     }
 
     public function teacherinfo()

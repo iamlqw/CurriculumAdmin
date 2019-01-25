@@ -21,27 +21,6 @@ class ListController extends CommonController
         return view('admin.teacher.list.list')->with('data',$student);
     }
 
-//    public function changeOrder()
-//    {
-//        $input = Input::all();
-//        $cate = teacher::find($input['cate_id']);
-//        $cate->cate_order = $input['cate_order'];
-//        $re = $cate->update();
-//        if ($re){
-//            $data = [
-//                'status'=>0,
-//                'msg'=>'成功',
-//            ];
-//        }else{
-//            $data = [
-//                'status'=>1,
-//                'msg'=>'失败',
-//            ];
-//        }
-//        return $data;
-//
-//    }
-//
     public function create()
     {
         return view('admin.teacher.list.add');

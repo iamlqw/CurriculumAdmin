@@ -19,6 +19,8 @@ class QuestionController extends CommonController
 
        $kdata = Question::where('question_isimportant','已入库')->orderBy('question_time','dsc')->paginate(10000);
 
+        Question::where('question_isread',0)->where('question_isanswer','已回答')->update(['question_isread'=>1]);
+
         return view('admin.student.question.list',compact('data','mydata','kdata'));
     }
 
@@ -33,6 +35,7 @@ class QuestionController extends CommonController
         $input = Input::except('_token');
         $input['question_time'] = time();
         $input['question_sid'] = session('user')['user_name'];
+        $input['question_isread'] = 0;
         $rules = [
             'question_title' => 'required',
             'question_content' => 'required'

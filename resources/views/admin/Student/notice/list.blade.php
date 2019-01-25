@@ -31,11 +31,15 @@
                     <div>
                         @foreach($data as $v)
                             <div class="result_wrap">
-                                <h3>{{$v->notice_title}}</h3>
+                                <h3>{{$v->notice_title}}
+                                    @if($v->notice_isread==0)
+                                        <span class="layui-badge-dot"></span>
+                                    @endif
+                                </h3>
                                 <br>
                                 <ul>
                                     <p>{!! $v->notice_description !!}</p>
-                                    <a href="{{url('admin/studentnotice/content/'.$v->nid)}}" class="readmore">原文>></a>
+                                    <a onclick="Notice()" href="{{url('admin/studentnotice/content/'.$v->nid)}}" class="readmore">原文>></a>
                                  </ul>
                                 <p style="width: 80%" class="dateview">
                                     <span>{{date("Y-m-d H:i",date($v->notice_time)) }}</span>

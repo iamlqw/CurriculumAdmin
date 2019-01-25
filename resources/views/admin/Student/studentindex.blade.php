@@ -25,16 +25,41 @@
 		<div class="layui-anim layui-anim-left">
 		<ul>
 			<li>
-				<h3><a href="{{url('admin/studentnotice')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>公告墙</a></h3>
+				<h3>
+					<a onclick="Notice()" href="{{url('admin/studentnotice')}}" target="main">
+						<i class="fa fa-fw fa-list-ul"></i>公告墙
+					</a>
+					@if($newnotice!=0)
+						<span id="notice" class="layui-badge">{{$newnotice}}</span>
+					@endif
+				</h3>
 			</li>
 			<li>
-				<h3><a href="{{url('admin/coursedata')}}" target="main"><i class="fa fa-fw fa-list-alt"></i>教学资料</a></h3>
+				<h3>
+					<a href="{{url('admin/coursedata')}}" target="main">
+						<i class="fa fa-fw fa-list-alt"></i>教学资料
+					</a>
+				</h3>
 			</li>
 			<li>
-				<h3><a href="{{url('admin/homework')}}" target="main"><i class="fa fa-fw fa-clipboard"></i>平时实验</a></h3>
+				<h3>
+					<a onclick="Experiment()" href="{{url('admin/homework')}}" target="main">
+						<i class="fa fa-fw fa-clipboard"></i>平时实验
+					</a>
+					@if($newexp!=0)
+						<span id="experiment" class="layui-badge">{{$newexp}}</span>
+					@endif
+				</h3>
 			</li>
 			<li>
-				<h3><a href="{{url('admin/question')}}" target="main"><i class="fa fa-fw fa-thumb-tack"></i>讨论区</a></h3>
+				<h3>
+					<a onclick="Answer()" href="{{url('admin/question')}}" target="main">
+						<i class="fa fa-fw fa-thumb-tack"></i>讨论区
+					</a>
+					@if($newanswer!=0)
+						<span id="answer" class="layui-badge">{{$newanswer}}</span>
+					@endif
+				</h3>
 			</li>
 		</ul>
 		</div>
@@ -67,4 +92,15 @@
 			text-decoration:none;
 		}
 	</style>
+	<script>
+		function Notice(){
+            document.getElementById('notice').style.display = "none";
+        }
+		function Experiment(){
+			document.getElementById('experiment').style.display = "none";
+		}
+        function Answer(){
+            document.getElementById('answer').style.display = "none";
+        }
+	</script>
 @endsection

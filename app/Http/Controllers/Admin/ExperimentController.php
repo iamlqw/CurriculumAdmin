@@ -20,11 +20,6 @@ class ExperimentController extends CommonController
     public function index()
     {
        $data = Experiment::orderBy('eid','asc')->paginate(5);
-//
-//       $ansdata = Question::where('question_isanswer','已回答')->orderBy('question_sid','asc')->paginate(10);
-//
-//       $kdata = Question::where('question_isimportant','已入库')->orderBy('question_sid','asc')->paginate(10);compact('data','ansdata','kdata')
-
         return view('admin.teacher.experiment.list')->with('data',$data);
     }
 

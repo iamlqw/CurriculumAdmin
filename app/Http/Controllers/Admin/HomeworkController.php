@@ -20,7 +20,6 @@ class HomeworkController extends CommonController
     {
        $data = Experiment::all()->toArray();
        $time = time();
-
            for($i=0;$i<count($data,0);$i++){
                $submit = Mark::where('experiment_id',$data[$i]['eid'])->where('student_id',session('user')['user_name'])->first();
                if($time<$data) {
@@ -40,6 +39,7 @@ class HomeworkController extends CommonController
                    $data[$i]['submit'] = '已过期';
                }
            }
+        Experiment::where('experiment_isread',0)->update(['experiment_isread'=>1]);
         return view('admin.student.homework.list',compact('data'));
     }
 // 提交作业

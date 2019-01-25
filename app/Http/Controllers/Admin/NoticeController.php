@@ -12,14 +12,13 @@ class NoticeController extends CommonController
 {
     public function index()
     {
-       $data = Notice::orderBy('nid','asc')->paginate(5);
-//       dd($data);
+       $data = Notice::orderBy('notice_time','dsc')->paginate(5);
         return view('admin.teacher.notice.list')->with('data',$data);
     }
     public function studentindex()
     {
-        $data = Notice::orderBy('nid','asc')->paginate(5);
-//       dd($data);
+        $data = Notice::orderBy('notice_time','dsc')->paginate(5);
+        Notice::where('notice_isread',0)->update(['notice_isread'=>1]);
         return view('admin.student.notice.list')->with('data',$data);
     }
 

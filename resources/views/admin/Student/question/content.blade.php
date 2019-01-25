@@ -26,7 +26,7 @@
             <div class="result_content">
                 <div class="index_about">
                     <h2 style="text-align:center;">{{$field->question_title}}</h2>
-                    <p style="text-align:center;width: 100%" class="dateview"><span class="d_time">发布时间：{{date("Y-m-d H:i",date($field->question_time)) }}</span><span>查看次数：2323</span></p>
+                    <p style="text-align:center;width: 100%" class="dateview"><span class="d_time">发布时间：{{date("Y-m-d H:i",date($field->question_time)) }}</span></p>
                     <ul class="infos">
                         <div class="result_content">
                             <ul>

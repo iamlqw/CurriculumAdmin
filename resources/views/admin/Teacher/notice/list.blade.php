@@ -20,9 +20,6 @@
                 </div>
                 <div class="short_wrap">
                     <a href="{{url('admin/notice/create')}}"><i class="fa fa-plus"></i>新建</a>
-                    {{--<a href="{{url('admin/list/batchcreate')}}"><i class="fa fa-plus"></i>批量导入</a>--}}
-                    {{--<a href="#" onclick="batchdel()"><i class="fa fa-recycle"></i>批量删除</a>--}}
-                    {{--<a href="#"><i class="fa fa-refresh"></i>导出成绩单</a>--}}
                 </div>
             </div>
             <!--快捷导航 结束-->
@@ -31,7 +28,6 @@
         <div class="result_wrap">
             <div class="result_content">
                 <article>
-                    {{--<link href="{{asset('resources/views/home/css/base.css')}}" rel="stylesheet">--}}
                     <link href="{{asset('resources/views/home/css/index.css')}}" rel="stylesheet">
                     <div>
                         @foreach($data as $v)

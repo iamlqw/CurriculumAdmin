@@ -24,7 +24,15 @@
         <div class="layui-collapse">
             @foreach($data as $v)
             <div class="layui-colla-item">
-                <h2 class="layui-colla-title">{{$v['experiment_name']}}({{$v['submit']}})&nbsp;@if($v['submit']=='已提交')<a href="/storage/app/public/uploads/{{$v['document']}}" target="view_window">查看</a>@endif</h2>
+                <h2 class="layui-colla-title">
+                    {{$v['experiment_name']}}({{$v['submit']}})&nbsp;
+                    @if($v['submit']=='已提交')
+                        <a href="/storage/app/public/uploads/{{$v['document']}}" target="view_window">查看</a>
+                    @endif
+                    @if($v['experiment_isread']==0)
+                        <span class="layui-badge-dot"></span>
+                    @endif
+                </h2>
                 <div class="layui-colla-content layui-show">
                     实验要求：{{$v['experiment_content']}}<br>
                     截止日期：{{date("Y-m-d H:i",date($v['experiment_endtime']))}}<br>
@@ -47,7 +55,6 @@
         #submit:visited {
             text-decoration:none;
         }
-
     </style>
     <script>
     </script>

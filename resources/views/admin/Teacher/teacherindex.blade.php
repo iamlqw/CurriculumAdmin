@@ -1,5 +1,7 @@
 @extends('layout.teacheradmin')
 @section('content')
+	<script type="text/javascript" src="{{asset('resources/org/layui/layui.js')}}"></script>
+	<link rel="stylesheet" href="{{asset('resources/org/layui/css/layui.css')}}">
 	<!--头部 开始-->
 	<div class="top_box">
 		<div class="top_left">
@@ -22,16 +24,35 @@
 	<div class="menu_box">
 		<ul>
             <li>
-            	<h3><a href="{{url('admin/notice')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>公告墙</a></h3>
+            	<h3>
+					<a href="{{url('admin/notice')}}" target="main">
+						<i class="fa fa-fw fa-list-ul"></i>公告墙
+					</a>
+				</h3>
             </li>
             <li>
-				<h3><a href="{{url('admin/data')}}" target="main"><i class="fa fa-fw fa-list-alt"></i>教学资料</a></h3>
+				<h3>
+					<a href="{{url('admin/data')}}" target="main">
+						<i class="fa fa-fw fa-list-alt"></i>教学资料
+					</a>
+				</h3>
             </li>
             <li>
-				<h3><a href="{{url('admin/experiment')}}" target="main"><i class="fa fa-fw fa-clipboard"></i>平时实验</a></h3>
+				<h3>
+					<a href="{{url('admin/experiment')}}" target="main">
+						<i class="fa fa-fw fa-clipboard"></i>平时实验
+					</a>
+				</h3>
             </li>
 			<li>
-				<h3><a href="{{url('admin/answer')}}" target="main"><i class="fa fa-fw fa-thumb-tack"></i>讨论区</a></h3>
+				<h3>
+					<a onclick="Question()" href="{{url('admin/answer')}}" target="main">
+						<i class="fa fa-fw fa-thumb-tack"></i>讨论区
+					</a>
+					@if($newquestion!=0)
+						<span id="question" class="layui-badge">{{$newquestion}}</span>
+					@endif
+				</h3>
             </li>
         </ul>
 	</div>
@@ -62,4 +83,9 @@
 			text-decoration:none;
 		}
 	</style>
+	<script>
+        function Question(){
+            document.getElementById('question').style.display = "none";
+        }
+	</script>
 @endsection
