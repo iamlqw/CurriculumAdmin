@@ -3,14 +3,14 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/teacherinfo')}}">首页</a> &raquo; <a href="{{url('admin/experiment')}}">平时实验</a> &raquo; 添加实验
+        <i class="fa fa-home"></i> <a href="{{url('admin/teacherinfo')}}">首页</a> &raquo; <a href="{{url('admin/data')}}">教学课件</a> &raquo; 模块修改
     </div>
     <!--面包屑导航 结束-->
 
 	<!--结果集标题与导航组件 开始-->
 	<div class="result_wrap">
         <div class="result_title">
-            <h3><i class="fa fa-plus"></i>添加章节<br></h3>
+            <h3><i class="fa fa-plus"></i>修改<br></h3>
             @if($errors!=null)
                 <div class="mark">
                     @if(is_object($errors))
@@ -35,14 +35,15 @@
     <!--结果集标题与导航组件 结束-->
     
     <div class="result_wrap">
-        <form action="{{url('admin/data')}}" method="post" enctype="multipart/form-data">
+        <form action="{{url('admin/data/'.$field->did)}}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="put">
             {{csrf_field()}}
             <table class="add_tab">
                 <tbody>
                     <tr>
                         <th>章节名称：</th>
                         <td>
-                            <input type="text" class="sm" name="data_chapter">
+                            <input type="text" class="sm" name="data_chapter" value="{{$field->data_chapter}}">
                         </td>
                     </tr>
                     <tr>
@@ -51,17 +52,18 @@
                             <select name="data_father_id">
                                 <option value="0">==大章节==</option>
                                 @foreach($data as $d)
-                                    <option value="{{$d->did}}">{{$d->data_chapter}}</option>
+                                    <option value="{{$d->did}}"
+                                    @if($d->did==$field->data_father_id) selected @endif>{{$d->data_chapter}}</option>
                                 @endforeach
                             </select>
                             <i class="fa fa-exclamation-circle yellow"></i>若大章节不用选择此框
                         </td>
                     </tr>
                     <tr>
-                        <th>资料(可选)：</th>
+                        <th>资料：</th>
                         <td>
                             <label for=""><input id="pdfChange" type="checkbox">课件（pdf）</label>
-                            <label for=""><input id="videoChange" type="checkbox">视频（wmv、avi、mp4,视频必须小于100M）</label>
+                            <label for=""><input id="videoChange" type="checkbox">视频（目前只支持mp4格式视频在线播放,视频必须小于100M）</label>
                         </td>
                     </tr>
                     <tr>

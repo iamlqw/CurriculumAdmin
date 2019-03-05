@@ -33,14 +33,14 @@
             <li>
 				<h3>
 					<a href="{{url('admin/data')}}" target="main">
-						<i class="fa fa-fw fa-list-alt"></i>教学资料
+						<i class="fa fa-fw fa-list-alt"></i>教学课件
 					</a>
 				</h3>
             </li>
             <li>
 				<h3>
 					<a href="{{url('admin/experiment')}}" target="main">
-						<i class="fa fa-fw fa-clipboard"></i>平时实验
+						<i class="fa fa-fw fa-clipboard"></i>课程作业/实验
 					</a>
 				</h3>
             </li>
@@ -54,6 +54,13 @@
 					@endif
 				</h3>
             </li>
+			<li>
+				<h3>
+					<a href="{{url('admin/list')}}" target="main">
+						<i class="fa fa-fw fa-plus"></i>学生管理
+					</a>
+				</h3>
+			</li>
         </ul>
 	</div>
 	<!--左侧导航 结束-->

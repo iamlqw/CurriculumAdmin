@@ -74,7 +74,7 @@ class ExperimentController extends CommonController
     public function edit($eid)
     {
         $field = Experiment::find($eid);
-        return view('admin.Teacher.experiment.edit',compact('field'));
+        return view('admin.teacher.experiment.edit',compact('field'));
     }
 //PUT/PATCH admin/answer/{photo}
     public function update($eid)

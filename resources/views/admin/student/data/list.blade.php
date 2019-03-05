@@ -3,7 +3,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; 教学资料
+        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; 教学课件
     </div>
     <!--面包屑导航 结束-->
 
@@ -27,8 +27,8 @@
                 <div class="layui-colla-item">
                     <h2 class="layui-colla-title">{{$v->data_chapter}}
                         <div style="float: right">
-                            <a target="view_window"href="/storage/app/public/uploads/{{$v->data_pdfpath}}">课件</a>
-                            <a  href="{{url('admin/coursedata/video/'.$v->did)}}">视频</a>
+                            <a id="submit" target="view_window"href="/storage/app/public/uploads/{{$v->data_pdfpath}}">课件</a>
+                            <a id="submit" href="{{url('admin/coursedata/video/'.$v->did)}}">视频</a>
                         </div>
                     </h2>
                     <div class="layui-colla-content layui-show">
@@ -36,8 +36,8 @@
                             @if($w->data_father_id==$v->did)
                                 <blockquote class="layui-elem-quote layui-quote-nm">
                                     {{$w->data_chapter}}
-                                    <a target="view_window" style="padding-left: 85%" href="/storage/app/public/uploads/{{$w['data_pdfpath']}}">课件</a>
-                                    <a href="{{url('admin/coursedata/video/'.$w->did)}}">视频</a>
+                                    <a id="submit" target="view_window" style="padding-left: 85%" href="/storage/app/public/uploads/{{$w['data_pdfpath']}}">课件</a>
+                                    <a id="submit" href="{{url('admin/coursedata/video/'.$w->did)}}">视频</a>
                                 </blockquote>
                             @endif
                         @endforeach
@@ -54,8 +54,8 @@
             foot-size:15px;
             padding: 6px 12px;
         }
-        #submit:visited {
-            text-decoration:none;
+        #submit {
+            color: blue;
         }
 
     </style>

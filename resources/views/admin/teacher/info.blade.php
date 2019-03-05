@@ -8,14 +8,14 @@
 	<!--面包屑导航 结束-->
 	
 	<!--结果集标题与导航组件 开始-->
-	<div class="result_wrap">
+	{{--<div class="result_wrap">--}}
 
-        <div class="result_content">
-            <div class="short_wrap">
-                <a href="{{url('admin/list')}}"><i class="fa fa-plus"></i>学生信息</a>
-            </div>
-        </div>
-    </div>
+        {{--<div class="result_content">--}}
+            {{--<div class="short_wrap">--}}
+                {{--<a href="{{url('admin/list')}}"><i class="fa fa-plus"></i>学生信息</a>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
     <!--结果集标题与导航组件 结束-->
 
 	

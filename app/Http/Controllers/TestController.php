@@ -34,9 +34,9 @@ class TestController extends Controller{
 //        dd($pdo);
 //        $pass = Crypt::encrypt('123456');
 //        echo $pass;
-//        $teacher = Teacher::all();
+//        $teacher = teacher::all();
 //        dd($teacher);
-//        $student = Student::all();
+//        $student = student::all();
 //        dd($student);
 //        dd(Experiment::all());
 //        $re2 = Storage::disk('uploads')->delete('a.txt');
@@ -45,7 +45,7 @@ class TestController extends Controller{
 //        dd($re2);
 //                $mark = Mark::all();
 //        dd($mark);
-//            $student = Student::all()->toArray();
+//            $student = student::all()->toArray();
 //            $i=1;
 //            foreach ($student as $v){
 ////                $input['id'] = $i;

@@ -3,7 +3,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; 实验
+        <i class="fa fa-home"></i> <a href="{{url('admin/studentinfo')}}">首页</a> &raquo; 课程作业/实验
     </div>
     <!--面包屑导航 结束-->
 
@@ -27,7 +27,7 @@
                 <h2 class="layui-colla-title">
                     {{$v['experiment_name']}}({{$v['submit']}})&nbsp;
                     @if($v['submit']=='已提交')
-                        <a href="/storage/app/public/uploads/{{$v['document']}}" target="view_window">查看</a>
+                        <a id="submit" href="/storage/app/public/uploads/{{$v['document']}}" target="view_window">查看</a>
                     @endif
                     @if($v['experiment_isread']==0)
                         <span class="layui-badge-dot"></span>
@@ -52,8 +52,8 @@
             foot-size:15px;
             padding: 6px 12px;
         }
-        #submit:visited {
-            text-decoration:none;
+        #submit {
+            color: blue;
         }
     </style>
     <script>

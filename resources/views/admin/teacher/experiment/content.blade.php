@@ -3,7 +3,7 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href="{{url('admin/teacherinfo')}}">首页</a> &raquo; 平时实验
+        <i class="fa fa-home"></i> <a href="{{url('admin/teacherinfo')}}">首页</a> &raquo; <a href="{{url('admin/experiment')}}">课程作业/实验</a> &raquo; 详情
     </div>
     <!--面包屑导航 结束-->
 
@@ -17,13 +17,17 @@
             <!--快捷导航 开始-->
             <div class="result_content">
                 <div class="result_title">
-                    <h3>操作</h3>
+                    <h3>{{$field->experiment_name}}</h3>
                 </div>
                 <div class="short_wrap">
-                    <a href="{{url('admin/experiment/create')}}"><i class="fa fa-plus"></i>新增实验</a>
-                    <a href="{{url('admin/experiment/report')}}"><i class="fa fa-refresh"></i>查看成绩单</a>
+                    <p>实验内容：{{$field->experiment_content}}</p>
                 </div>
-
+                <div class="short_wrap">
+                    <p>实验资料：<a target="view_window" href="/storage/app/public/uploads/{{$field->experiment_document}}">查看</a></p>
+                </div>
+                <div class="short_wrap">
+                    <p>提交人数：{{$data->count()}}</p>
+                </div>
             </div>
             <!--快捷导航 结束-->
         </div>
@@ -32,39 +36,33 @@
             <div class="result_content">
                 <table class="list_tab">
                     <tr>
-                        <th class="tc">第几次实验</th>
-                        <th class="tc">实验要求</th>
-                        <th class="tc">开始时间</th>
-                        <th class="tc">截至日期</th>
-                        <th class="tc">操作</th>
+                        <th class="tc">学号</th>
+                        <th class="tc">姓名</th>
+                        <th class="tc">提交文件</th>
+                        <th class="tc">提交时间</th>
+                        <th class="tc">得分</th>
                     </tr>
 
                 @foreach($data as $v)
                     <tr>
                         <td class="tc">
-                            {{$v->experiment_name}}
+                            {{$v->student_id}}
                         </td>
                         <td class="tc">
-                            {{$v->experiment_content}}
+                            {{$v->student_name}}
                         </td>
                         <td class="tc">
-                            {{date("Y-m-d H:i",date($v->experiment_starttime))}}
+                            <a style="padding-left: 43%" href="{{url('admin/experiment/message/'.$v->id)}}">批改</a>
                         </td>
                         <td class="tc">
-                            {{date("Y-m-d H:i",date($v->experiment_endtime))}}
+                            {{date("Y-m-d H:i",date($v->submit_time))}}
                         </td>
-                        <td>
-                            <a style="padding-left: 25%" href="{{url('admin/experiment/content/'.$v->eid)}}">详情</a>
-                            <a href="{{url('admin/experiment/'.$v->eid.'/edit')}}">修改</a>
-                            <a href="#" onclick="delCate({{$v->eid}})">删除</a>
+                        <td class="tc">
+                            {{$v->mark}}
                         </td>
                     </tr>
                 @endforeach
                 </table>
-
-                <div class="page_list">
-                    {{$data->links()}}
-                </div>
             </div>
         </div>
     </form>
@@ -78,7 +76,7 @@
     </style>
     <script>
         function delCate(eid) {
-            layer.confirm('您确定要删除这个学生吗？', {
+            layer.confirm('您确定要删除这个实验吗？', {
                 btn: ['确定','取消'] //按钮
             }, function(){
                 $.post("{{url('admin/experiment/')}}/"+eid,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {

@@ -37,14 +37,14 @@
 			<li>
 				<h3>
 					<a href="{{url('admin/coursedata')}}" target="main">
-						<i class="fa fa-fw fa-list-alt"></i>教学资料
+						<i class="fa fa-fw fa-list-alt"></i>教学课件
 					</a>
 				</h3>
 			</li>
 			<li>
 				<h3>
 					<a onclick="Experiment()" href="{{url('admin/homework')}}" target="main">
-						<i class="fa fa-fw fa-clipboard"></i>平时实验
+						<i class="fa fa-fw fa-clipboard"></i>课程作业/实验
 					</a>
 					@if($newexp!=0)
 						<span id="experiment" class="layui-badge">{{$newexp}}</span>

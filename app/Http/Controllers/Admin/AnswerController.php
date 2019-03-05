@@ -59,7 +59,7 @@ class AnswerController extends CommonController
     public function edit($qid)
     {
         $field = Question::find($qid);
-        return view('admin.Teacher.answer.edit',compact('field'));
+        return view('admin.teacher.answer.edit',compact('field'));
     }
 //PUT/PATCH admin/answer/{photo}
     public function update($qid)

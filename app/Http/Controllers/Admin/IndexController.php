@@ -59,7 +59,7 @@ class IndexController extends CommonController
     {
         $user = Teacher::find(session('user')['user_name']);
         $info = Information::all();
-        return view('admin.Teacher.info',compact('user','info'));
+        return view('admin.teacher.info',compact('user','info'));
     }
 
     public function create()
@@ -95,7 +95,7 @@ class IndexController extends CommonController
     {
         $user = Student::find(session('user')['user_name']);
         $info = Information::all();
-        return view('admin.Student.info',compact('user','info'));
+        return view('admin.student.info',compact('user','info'));
     }
 
     public function pass()
