@@ -29,7 +29,6 @@
                     <p style="text-align:center;width: 100%" class="dateview">
                         <span class="d_time">发布时间：{{date("Y-m-d H:i",date($field->notice_time)) }}</span>
                         <span>编辑：{{$field->notice_editor}}</span>
-                        <span>查看次数：2323</span>
                     </p>
                     <ul class="infos">
                         <div class="result_content">

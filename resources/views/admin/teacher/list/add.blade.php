@@ -10,7 +10,7 @@
 	<!--结果集标题与导航组件 开始-->
 	<div class="result_wrap">
         <div class="result_title">
-            <h3><i class="fa fa-plus"></i>添加学生(请选择Excel文件)<br></h3>
+            <h3><i class="fa fa-plus"></i>添加学生<br></h3>
             @if($errors!=null)
                 <div class="mark">
                     @if(is_object($errors))
@@ -42,29 +42,13 @@
                     <tr>
                         <th>学生姓名：</th>
                         <td>
-                            <input type="text" class="sm" name="name">
+                            <input type="text" class="sm" name="name" value="{{old('name')}}">
                         </td>
                     </tr>
                     <tr>
                         <th>学号：</th>
                         <td>
-                            <input type="text" name="sid">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th width="120"><i class="require">*</i>性别：</th>
-                        <td>
-                            <select name="sex">
-                                <option value="">==请选择==</option>
-                                <option value="男">男</option>
-                                <option value="女">女</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>学院：</th>
-                        <td>
-                            <input type="text" name="major">
+                            <input type="text" name="sid"  value="{{old('sid')}}">
                         </td>
                     </tr>
                     <tr>

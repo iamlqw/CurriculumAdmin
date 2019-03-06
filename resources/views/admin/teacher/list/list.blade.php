@@ -34,8 +34,6 @@
                         <th class="tc" width="5%"><input type="checkbox" name="checkbox"></th>
                         <th class="tc">学生姓名</th>
                         <th class="tc">学号</th>
-                        <th class="tc">性别</th>
-                        <th class="tc">专业</th>
                         <th class="tc">班级</th>
                         <th class="tc">操作</th>
                     </tr>
@@ -49,17 +47,11 @@
                         <td class="tc">
                             {{$v->sid}}
                         </td>
-                        <td class="tc">
-                            {{$v->sex}}
-                        </td>
-                        <td  class="tc">
-                            {{$v->major}}
-                        </td>
                         <td  class="tc">
                             {{$v->class}}
                         </td>
                         <td  class="tc">
-                            <a style="padding-left: 33%" href="{{url('admin/list/'.$v->sid.'/edit')}}">修改</a>
+                            <a style="padding-left: 39%" href="{{url('admin/list/'.$v->sid.'/edit')}}">修改</a>
                             <a href="#" onclick="delCate({{$v->sid}})">删除</a>
                         </td>
                     </tr>

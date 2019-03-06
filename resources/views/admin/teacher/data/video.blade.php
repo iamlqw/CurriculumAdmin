@@ -4,7 +4,14 @@
 	<!--面包屑导航 开始-->
 	<div class="crumb_warp">
 		<!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-		<i class="fa fa-home"></i> <a href="{{url('admin/teacherinfo')}}">首页</a> &raquo; <a href="{{url('admin/data')}}">教学课件</a> &raquo; 视频播放
+		<i class="fa fa-home"></i>
+		@if(session('user')['user_identity']!='student')
+			<a href="{{url('admin/teacherinfo')}}">首页</a> &raquo;
+			<a href="{{url('admin/data')}}">教学课件</a> &raquo; 视频播放
+		@else
+			<a href="{{url('admin/studentinfo')}}">首页</a> &raquo;
+			<a href="{{url('admin/coursedata')}}">教学课件</a> &raquo; 视频播放
+		@endif
 	</div>
 	<!--面包屑导航 结束-->
 

@@ -54,16 +54,12 @@ class ListController extends CommonController
                         $rules = [
                             'name' => 'required',
                             'sid' => 'required|digits:7',
-                            'sex' => 'required',
-                            'major' => 'required',
                             'class' => 'required',
                         ];
                         $massage = [
                             'name.required'=>'学生姓名不能为空!',
                             'sid.required'=>'学号不能为空!',
                             'sid.num'=>'学号必须为7位数字!',
-                            'sex.required'=>'性别不能为空!',
-                            'major.required'=>'专业不能为空!',
                             'class.required'=>'班级不能为空!',
                         ];
                         $validator = Validator::make($data,$rules,$massage);
@@ -97,16 +93,12 @@ class ListController extends CommonController
             $rules = [
                 'name' => 'required',
                 'sid' => 'required|digits:7',
-                'sex' => 'required',
-                'major' => 'required',
                 'class' => 'required',
             ];
             $massage = [
                 'name.required'=>'学生姓名不能为空!',
                 'sid.required'=>'学号不能为空!',
                 'sid.digits'=>'学号规则不符!',
-                'sex.required'=>'性别不能为空!',
-                'major.required'=>'专业不能为空!',
                 'class.required'=>'班级不能为空!',
             ];
             $validator = Validator::make($input,$rules,$massage);

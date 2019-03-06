@@ -42,19 +42,19 @@
                     <tr>
                         <th width="120">标题：</th>
                         <td>
-                            <input type="text" class="lg" name="notice_title">
+                            <input type="text" class="lg" name="notice_title" value="{{ old('notice_title') }}">
                         </td>
                     </tr>
                     <tr>
                         <th>作者：</th>
                         <td>
-                            <input type="text" class="sm" name="notice_editor">
+                            <input type="text" class="sm" name="notice_editor" value="{{ old('notice_editor') }}">
                         </td>
                     </tr>
                     <tr>
                         <th>描述：</th>
                         <td>
-                            <textarea name="notice_description" id="" cols="30" rows="10"></textarea>
+                            <textarea name="notice_description" id="" cols="30" rows="10">{{ old('notice_description') }}</textarea>
                         </td>
                     </tr>
                     <tr>
@@ -63,7 +63,7 @@
                             <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.config.js')}}"></script>
                             <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.all.min.js')}}"> </script>
                             <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/lang/zh-cn/zh-cn.js')}}"></script>
-                            <script id="editor" name="notice_content" type="text/plain" style="width:860px;height:300px;"></script>
+                            <script id="editor" name="notice_content" type="text/plain" style="width:860px;height:300px;">{!! old('notice_content') !!}</script>
                             <script type="text/javascript">
                             var ue = UE.getEditor('editor');
                             </script>

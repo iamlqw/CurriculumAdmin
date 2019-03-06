@@ -25,7 +25,7 @@ class Data extends Model
                 $arr[] = $data[$k];
                 foreach ($data as $m => $n) {
                     if ($n->$field_pid == $v->$field_id) {
-                        $data[$m]["_" . $field_name] = '---' . $data[$m][$field_name];
+                        $data[$m]["_" . $field_name] = '┃------' . $data[$m][$field_name];
                         $arr[] = $data[$m];
                     }
                 }

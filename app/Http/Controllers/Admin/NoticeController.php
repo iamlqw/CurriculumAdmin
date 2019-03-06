@@ -56,7 +56,7 @@ class NoticeController extends CommonController
                 return back()->with('errors','数据未知错误');
             }
         } else {
-            return back()->withErrors($validator);
+            return back()->withErrors($validator)->withInput();
         }
 //        $re = Notice::create($input);
     }

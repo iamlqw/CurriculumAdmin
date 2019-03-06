@@ -57,7 +57,7 @@ class DataController extends CommonController
                         $pdf->move(base_path() . '/storage/app/public/uploads/data/pdf/', $newname);//写入
                         $input['data_pdfpath'] = 'data/pdf/' . $newname;
                     } else {
-                        return back()->with('errors', '请上传pdf格式文件');
+                        return back()->with('errors', '课件请上传pdf格式文件');
                     }
                 }
             }
@@ -70,7 +70,7 @@ class DataController extends CommonController
                         $video->move(base_path() . '/storage/app/public/uploads/data/video/', $newname);//写入
                         $input['data_videopath'] = 'data/video/' . $newname;
                     } else {
-                        return back()->with('errors', '请上传mp4格式文件');
+                        return back()->with('errors', '视频请上传mp4格式文件');
                     }
                 }else{
                     return back()->with('errors', '文件必须小于100M');

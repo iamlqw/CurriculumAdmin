@@ -40,13 +40,13 @@
             <table class="add_tab">
                 <tbody>
                     <tr>
-                        <th>章节名称：</th>
+                        <th>章（节）名称：</th>
                         <td>
                             <input type="text" class="sm" name="data_chapter">
                         </td>
                     </tr>
                     <tr>
-                        <th width="120">所属章节名称：</th>
+                        <th width="150">所属章（节）名称：</th>
                         <td>
                             <select name="data_father_id">
                                 <option value="0">==大章节==</option>
@@ -61,7 +61,7 @@
                         <th>资料(可选)：</th>
                         <td>
                             <label for=""><input id="pdfChange" type="checkbox">课件（pdf）</label>
-                            <label for=""><input id="videoChange" type="checkbox">视频（wmv、avi、mp4,视频必须小于100M）</label>
+                            <label for=""><input id="videoChange" type="checkbox">视频（视频格式必须为mp4,且大小必须小于100M）</label>
                         </td>
                     </tr>
                     <tr>
@@ -83,6 +83,14 @@
                 </tbody>
             </table>
         </form>
+        <div class="tips">
+            <h3>注意事项</h3>
+            <p>章与节均可上传对应课件视频，添加节时要选择它的所属章。</p>
+            <p>以高等数学第一张举例说明添加效果：</p>
+            <p>&nbsp&nbsp第一章 函数与极限 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp -----章（所属章（节）名称选择为“==大章节==”效果）</p>
+            <p>&nbsp&nbsp┃------1.函数基本概念 &nbsp&nbsp&nbsp   -----节 (所属章（节）名称选择为“第一章 函数与极限”效果，在添加“函数与极限”这一章后会自动出现该选项)</p>
+            <p>&nbsp&nbsp┃------2.函数的极限及运算法则 &nbsp&nbsp&nbsp  -----节</p>
+        </div>
     </div>
     <script>
         $(function () {
