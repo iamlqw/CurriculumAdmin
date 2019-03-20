@@ -16,13 +16,7 @@
                     <label>姓名</label><span>{{$user->name}}</span>
                 </li>
                 <li>
-                    <label>性别</label><span>{{$user->sex}}</span>
-                </li>
-                <li>
                     <label>学号</label><span>{{$user->sid}}</span>
-                </li>
-                <li>
-                    <label>专业</label><span>{{$user->major}}</span>
                 </li>
                 <li>
                     <label>班级</label><span>{{$user->class}}</span>

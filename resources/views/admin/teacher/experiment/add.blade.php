@@ -40,7 +40,7 @@
                     <tr>
                         <th>实验要求：</th>
                         <td>
-                            <textarea name="experiment_content" id="" cols="30" rows="10"></textarea><i class="fa fa-exclamation-circle yellow"></i>内容不宜过多
+                            <textarea name="experiment_content" id="" cols="30" rows="10"></textarea><i class="fa fa-exclamation-circle yellow"></i>内容建议在50字以内
                         </td>
                     </tr>
                     <tr>

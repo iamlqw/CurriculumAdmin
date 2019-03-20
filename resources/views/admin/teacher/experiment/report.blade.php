@@ -1,5 +1,9 @@
 @extends('layout.teacheradmin')
 @section('content')
+    <script type="text/javascript" src="{{asset('resources/org/excel/jszip.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('resources/org/excel/FileSaver.js')}}"></script>
+    <script type="text/javascript" src="{{asset('resources/org/excel/excel-gen.js')}}"></script>
+    {{--<script type="text/javascript" src="{{asset('resources/org/excel/demo.page.js')}}"></script>--}}
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
@@ -20,11 +24,14 @@
                 </div>
             </div>
             <!--快捷导航 结束-->
+            <div class="short_wrap">
+                <a href="#" id="generate-excel"><i class="fa fa-plus"></i>导出excel表</a>
+            </div>
         </div>
 
         <div class="result_wrap">
             <div class="result_content">
-                <table class="list_tab">
+                <table class="list_tab" id="report_table">
                     <tr>
                         <th class="tc">学生姓名</th>
                         <th class="tc">学号</th>
@@ -80,6 +87,15 @@
         }
     </style>
     <script>
+        $(document).ready(function () {
+            excel = new ExcelGen({
+                "src_id": "report_table",
+                "show_header": true
+            });
+            $("#generate-excel").click(function () {
+                excel.generate();
+            });
+        });
         function delCate(sid) {
             layer.confirm('您确定要删除这个学生吗？', {
                 btn: ['确定','取消'] //按钮
